@@ -9,7 +9,14 @@
 #import "CGCard.h"
 
 @interface CGMatchingCard : CGCard
-@property (strong,nonatomic) NSString *cardSuit;
-@property (nonatomic) NSUInteger *cardRank;
+@property (nonatomic,weak) NSString *cardSuit;
+@property (nonatomic,weak) NSString *cardRank;
 
+@property (nonatomic,weak) NSArray * validSuits;
+@property (nonatomic) NSArray * validRanks;
+
+- (NSArray *) validSuits;
+- (NSArray *) validRanks;
+- (CGCard *) createCardWithSuit: (NSString *) suit andRank: (NSString *) rank;
 @end
+

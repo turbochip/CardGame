@@ -9,5 +9,9 @@
 #import "CGDeck.h"
 
 @implementation CGDeck
+-(NSMutableArray *)createDeckof: (id) card
+{
+    return nil;
+}
 
 @end

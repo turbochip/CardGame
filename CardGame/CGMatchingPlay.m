@@ -13,5 +13,9 @@
 {
     return NO;
 }
+- (NSInteger) calculateScore
+{
+    return 0;
+}
 
 @end

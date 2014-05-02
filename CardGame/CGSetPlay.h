@@ -10,5 +10,5 @@
 
 @interface CGSetPlay : NSObject
 - (BOOL) matchCards: (NSMutableArray *) candidateCards;
-
+- (NSInteger) calcScore;
 @end

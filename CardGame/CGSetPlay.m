@@ -14,4 +14,8 @@
     return NO;
 }
 
+- (NSInteger) calcScore
+{
+    return 0;
+}
 @end

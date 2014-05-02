@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @interface CGCard : NSObject
+
 @property (nonatomic) BOOL cardChosen;
 @property (strong,nonatomic) NSString *cardBackImage;
+
 @end

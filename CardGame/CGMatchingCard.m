@@ -10,4 +10,32 @@
 
 @implementation CGMatchingCard
 
+- (NSArray *) validSuits
+{
+    if(!_validSuits)
+    {
+        _validSuits = [NSArray arrayWithObjects: @"S",@"H",@"D",@"C",nil];
+    }
+    return _validSuits;
+}
+
+- (NSArray *) validRanks
+{
+    if(!_validRanks)
+    {
+        _validRanks = [NSArray arrayWithObjects:@"A",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"J",@"Q",@"K",nil];
+    }
+    return _validRanks;
+}
+
+- (CGMatchingCard *) createCardWithSuit: (NSString *) suit andRank: (NSString *) rank
+{
+    CGMatchingCard * newCard = [[CGMatchingCard alloc] init];
+    
+    newCard.cardSuit=suit;
+    newCard.cardRank=rank;
+    NSLog(@"Creating %@,%@",newCard.cardSuit,newCard.cardRank);
+    return newCard;
+}
+
 @end

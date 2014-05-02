@@ -7,8 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#include "CGDeck.h"
 
 @interface CGHand : NSObject
 @property (nonatomic) NSInteger handSize;
 @property (strong,nonatomic) NSMutableArray *handOfCards;
+
+-(NSMutableArray *) dealHandFrom: (id) deckOfCards;
+-(NSMutableArray *) handOfCards;
 @end

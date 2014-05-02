@@ -11,4 +11,6 @@
 
 @interface CGMatchingPlay : NSObject
 - (BOOL) matchCards: (NSMutableArray *) candidateCards;
+- (NSInteger) calculateScore;
+
 @end

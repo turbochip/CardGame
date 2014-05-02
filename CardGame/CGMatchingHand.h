@@ -7,11 +7,16 @@
 //
 
 #import "CGHand.h"
-#include "CGMatchingDeck.h"
-#include "CGMatchingCard.h"
+#import "CGMatchingDeck.h"
+#import "CGMatchingCard.h"
 
 @interface CGMatchingHand : CGHand
-- (NSMutableArray *) dealHand: (CGMatchingDeck *) cardDeck;
+@property (nonatomic,strong) NSMutableArray * matchingHand;
+@property (nonatomic) NSInteger cardsInHand;
+
+- (NSUInteger) gethandSize;
+
+- (CGMatchingHand *) dealHand: (CGMatchingDeck *) cardDeck;
 - (CGMatchingCard *) drawRandomCard: (CGMatchingDeck *) cardDeck;
 - (void) removeCard: (CGMatchingCard *) card FromHand: (NSMutableArray *) hand;
 @end

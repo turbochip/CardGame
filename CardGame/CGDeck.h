@@ -7,10 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#include "CGCard.h"
+#import "CGCard.h"
 
 @interface CGDeck : NSObject
 @property (strong,nonatomic) NSMutableArray *deckOfCards;    //of cards
 @property (nonatomic) NSInteger deckSize;
 
+-(NSMutableArray *)createDeckof: (id) card;
 @end

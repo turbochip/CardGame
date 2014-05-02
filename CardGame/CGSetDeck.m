@@ -10,4 +10,8 @@
 
 @implementation CGSetDeck
 
+- (NSMutableString *)createSetDeckof: (CGCard *) card
+{
+    return nil;
+}
 @end
