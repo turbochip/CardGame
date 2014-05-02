@@ -9,5 +9,16 @@
 #import "CGMatchingHand.h"
 
 @implementation CGMatchingHand
-
+- (NSMutableArray *) dealHand: (CGMatchingDeck *) cardDeck
+{
+    return nil;
+}
+- (CGMatchingCard *) drawRandomCard: (CGMatchingDeck *) cardDeck
+{
+    return nil;
+}
+- (void) removeCard: (CGMatchingCard *) card FromHand: (NSMutableArray *) hand
+{
+    
+}
 @end

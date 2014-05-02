@@ -9,5 +9,16 @@
 #import "CGSetHand.h"
 
 @implementation CGSetHand
-
+- (NSMutableArray *) dealHand: (CGSetDeck *) cardDeck
+{
+    return nil;
+}
+- (CGSetCard *) drawRandomCard: (CGSetDeck *) cardDeck
+{
+    return nil;
+}
+- (void) removeCard: (CGSetCard *) card FromHand: (NSMutableArray *) hand
+{
+    
+}
 @end

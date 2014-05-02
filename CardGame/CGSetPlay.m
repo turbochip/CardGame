@@ -9,5 +9,9 @@
 #import "CGSetPlay.h"
 
 @implementation CGSetPlay
+- (BOOL) matchCards: (NSMutableArray *) candidateCards
+{
+    return NO;
+}
 
 @end

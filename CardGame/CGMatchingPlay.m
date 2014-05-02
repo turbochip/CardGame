@@ -9,5 +9,9 @@
 #import "CGMatchingPlay.h"
 
 @implementation CGMatchingPlay
+- (BOOL) matchCards: (NSMutableArray *) candidateCards
+{
+    return NO;
+}
 
 @end
