@@ -10,6 +10,7 @@
 #import "CGMatchingDeck.h"
 #import "CGMatchingHand.h"
 #import "CGMatchingCard.h"
+#import "CGMatchingView.h"
 
 @interface CGMatchingViewController ()
 @property (nonatomic,strong) CGMatchingDeck * fullDeck;
@@ -48,6 +49,12 @@
 //        i++;
         NSLog(@"Hand[%d]=%@ %@",i,
               [self.playingHand.matchingHand[i] cardRank] ,[self.playingHand.matchingHand[i] cardSuit]);
+ //       NSString * Title;
+        NSString * Title=[[NSString alloc] initWithFormat:@"%@ %@",[self.playingHand.matchingHand[i] cardRank] ,[self.playingHand.matchingHand[i] cardSuit]];
+        [self.TableCard[i] setBackgroundColor:[UIColor yellowColor]];
+
+        [self.TableCard[i] setTitle:Title forState:UIControlStateNormal];
+         
     }
 }
 

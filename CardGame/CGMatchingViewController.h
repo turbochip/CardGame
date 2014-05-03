@@ -10,7 +10,9 @@
 
 @interface CGMatchingViewController : UIViewController
 
-@property (strong, nonatomic) IBOutlet UIView *playingCards;
+@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *TableCard;
+
+
 
 - (void) updateUI;
 
