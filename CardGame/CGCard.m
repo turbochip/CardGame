@@ -10,4 +10,18 @@
 
 @implementation CGCard
 
+- (instancetype) init
+{
+    self=[super init];
+    return self;
+}
+
+-(NSString *)contents
+{
+    if(!_contents) {
+        NSString * _contents=@"";
+    }
+    return _contents;
+}
+
 @end

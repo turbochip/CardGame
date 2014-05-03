@@ -7,10 +7,13 @@
 //
 
 #import "CGSetPlay.h"
+#import "CGMatchingHand.h"
+#import "CGMatchingCard.h"
 
 @implementation CGSetPlay
 - (BOOL) matchCards: (NSMutableArray *) candidateCards
 {
+    
     return NO;
 }
 

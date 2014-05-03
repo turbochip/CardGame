@@ -12,5 +12,6 @@
 
 @property (nonatomic) BOOL cardChosen;
 @property (strong,nonatomic) NSString *cardBackImage;
+@property (nonatomic,strong) NSString *contents;
 
 @end

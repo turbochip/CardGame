@@ -7,13 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CGMatchingHand.h"
 
 @interface CGMatchingViewController : UIViewController
 
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *TableCard;
 
-
-
+- (NSMutableArray *) selectedCards;
 - (void) updateUI;
 
+- (NSInteger) findCardInHand: (UIButton *) title InHand: (CGMatchingHand *) hand;
 @end

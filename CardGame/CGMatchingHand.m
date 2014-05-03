@@ -23,11 +23,13 @@
     return self.matchingHand.count;
 }
 
+#define HANDSIZE 6
+
 - (CGMatchingHand *) dealHand: (CGMatchingDeck *) cardDeck
 {
     CGMatchingHand * hand=[[CGMatchingHand alloc] init];
 
-    hand.handSize=3;
+    hand.handSize=HANDSIZE;
     for (int i=0;i<hand.handSize;i++)
     {
         [hand.matchingHand addObject:[hand drawRandomCard:cardDeck]];
@@ -41,7 +43,7 @@
     CGMatchingCard *randomCard = nil;
     
     if (cardDeck.deckSize){
-        unsigned index = arc4random() % cardDeck.deckSize;
+        unsigned index = arc4random() % cardDeck.deckOfPlayingCards.count;
         randomCard = cardDeck.deckOfPlayingCards[index];
         [cardDeck.deckOfPlayingCards removeObjectAtIndex:index];
         NSLog(@"Random Card is %@ %@",randomCard.cardRank,randomCard.cardSuit);

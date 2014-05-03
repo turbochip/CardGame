@@ -7,8 +7,15 @@
 //
 
 #import "CGMatchingCard.h"
+#import "CGCard.h"
 
 @implementation CGMatchingCard
+
+- (instancetype) init
+{
+    self=[super init];
+    return self;
+}
 
 - (NSArray *) validSuits
 {
@@ -34,8 +41,32 @@
     
     newCard.cardSuit=suit;
     newCard.cardRank=rank;
+    newCard.cardViewButton=nil;
     NSLog(@"Creating %@,%@",newCard.cardSuit,newCard.cardRank);
     return newCard;
 }
+
+- (NSString *) cardSuit
+{
+    if(!_cardSuit)
+        _cardSuit=@"";
+    self.contents=_cardRank;
+    self.contents=[self.contents stringByAppendingString:@" "];
+    self.contents=[self.contents stringByAppendingString:_cardSuit];
+    NSLog(@"Contents=%@",self.contents);
+    return _cardSuit;
+}
+
+- (NSString *) cardRank
+{
+    if(!_cardRank)
+        _cardRank=@"";
+    self.contents=_cardRank;
+    self.contents=[self.contents stringByAppendingString:@" "];
+    self.contents=[self.contents stringByAppendingString:_cardSuit];
+    NSLog(@"Contents=%@",self.contents);
+    return _cardRank;
+}
+
 
 @end

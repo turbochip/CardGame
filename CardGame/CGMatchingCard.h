@@ -11,7 +11,7 @@
 @interface CGMatchingCard : CGCard
 @property (nonatomic,weak) NSString *cardSuit;
 @property (nonatomic,weak) NSString *cardRank;
-
+@property (nonatomic,weak) UIButton *cardViewButton;
 @property (nonatomic,weak) NSArray * validSuits;
 @property (nonatomic) NSArray * validRanks;
 
