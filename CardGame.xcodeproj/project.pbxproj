@@ -33,7 +33,6 @@
 		F1698F1119133BC200DEE18B /* CGSetDeck.m in Sources */ = {isa = PBXBuildFile; fileRef = F1698F1019133BC200DEE18B /* CGSetDeck.m */; };
 		F1698F1419133BDC00DEE18B /* CGMatchingHand.m in Sources */ = {isa = PBXBuildFile; fileRef = F1698F1319133BDC00DEE18B /* CGMatchingHand.m */; };
 		F1698F1719133BEB00DEE18B /* CGSetHand.m in Sources */ = {isa = PBXBuildFile; fileRef = F1698F1619133BEB00DEE18B /* CGSetHand.m */; };
-		F1698F1A1913401100DEE18B /* CGMatchingPlay.m in Sources */ = {isa = PBXBuildFile; fileRef = F1698F191913401100DEE18B /* CGMatchingPlay.m */; };
 		F1698F1D1913402400DEE18B /* CGSetPlay.m in Sources */ = {isa = PBXBuildFile; fileRef = F1698F1C1913402400DEE18B /* CGSetPlay.m */; };
 /* End PBXBuildFile section */
 
@@ -91,8 +90,6 @@
 		F1698F1319133BDC00DEE18B /* CGMatchingHand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGMatchingHand.m; sourceTree = "<group>"; };
 		F1698F1519133BEB00DEE18B /* CGSetHand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGSetHand.h; sourceTree = "<group>"; };
 		F1698F1619133BEB00DEE18B /* CGSetHand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGSetHand.m; sourceTree = "<group>"; };
-		F1698F181913401100DEE18B /* CGMatchingPlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGMatchingPlay.h; sourceTree = "<group>"; };
-		F1698F191913401100DEE18B /* CGMatchingPlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGMatchingPlay.m; sourceTree = "<group>"; };
 		F1698F1B1913402400DEE18B /* CGSetPlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGSetPlay.h; sourceTree = "<group>"; };
 		F1698F1C1913402400DEE18B /* CGSetPlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGSetPlay.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -216,8 +213,6 @@
 				F1698F1319133BDC00DEE18B /* CGMatchingHand.m */,
 				F1698F1519133BEB00DEE18B /* CGSetHand.h */,
 				F1698F1619133BEB00DEE18B /* CGSetHand.m */,
-				F1698F181913401100DEE18B /* CGMatchingPlay.h */,
-				F1698F191913401100DEE18B /* CGMatchingPlay.m */,
 				F1698F1B1913402400DEE18B /* CGSetPlay.h */,
 				F1698F1C1913402400DEE18B /* CGSetPlay.m */,
 			);
@@ -351,7 +346,6 @@
 				F1698F0B19133B9300DEE18B /* CGSetCard.m in Sources */,
 				F1698F1419133BDC00DEE18B /* CGMatchingHand.m in Sources */,
 				F1698EFF1913393400DEE18B /* CGCard.m in Sources */,
-				F1698F1A1913401100DEE18B /* CGMatchingPlay.m in Sources */,
 				F14D4F931914627200E1061A /* CGMatchingView.m in Sources */,
 				F1698EF6191337EE00DEE18B /* CGMatchingViewController.m in Sources */,
 				F1698F0E19133BAE00DEE18B /* CGMatchingDeck.m in Sources */,

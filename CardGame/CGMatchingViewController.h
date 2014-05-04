@@ -13,8 +13,10 @@
 
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *TableCard;
 
+@property (strong, nonatomic) IBOutlet UILabel *ScoreLabel;
+
 - (NSMutableArray *) selectedCards;
 - (void) updateUI;
-
+- (void) Start;
 - (NSInteger) findCardInHand: (UIButton *) title InHand: (CGMatchingHand *) hand;
 @end

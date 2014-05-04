@@ -13,10 +13,15 @@
 @interface CGMatchingHand : CGHand
 @property (nonatomic,strong) NSMutableArray * matchingHand;
 @property (nonatomic) NSInteger cardsInHand;
+//@property (nonatomic) NSInteger score;
+@property (nonatomic) NSInteger score;
+
+- (void) calculateScore: (NSInteger) handScore;
+
+- (BOOL) matchCards: (NSMutableArray *) candidateCards;
 
 - (NSUInteger) gethandSize;
 
 - (CGMatchingHand *) dealHand: (CGMatchingDeck *) cardDeck;
 - (CGMatchingCard *) drawRandomCard: (CGMatchingDeck *) cardDeck;
-- (void) removeCard: (CGMatchingCard *) card FromHand: (NSMutableArray *) hand;
 @end

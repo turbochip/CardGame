@@ -51,8 +51,35 @@
     return randomCard;
 }
 
-- (void) removeCard: (CGMatchingCard *) card FromHand: (NSMutableArray *) hand
+- (BOOL) matchCards: (NSMutableArray *) candidateCards
 {
+    BOOL matched = NO;
     
+    if([[candidateCards objectAtIndex:0]cardRank] ==[[candidateCards objectAtIndex:1]cardRank]) {
+        NSLog(@"Cards Rank Matches +4 points");
+        [self calculateScore: (NSInteger)4];
+        matched=YES;
+    }
+    else {
+        if([[candidateCards objectAtIndex:0]cardSuit]==[[candidateCards objectAtIndex:1]cardSuit]) {
+            NSLog(@"Cards Suit Matches +1 Point");
+            
+            [self calculateScore:(NSInteger)1];
+            matched=YES;
+        }
+    }
+    if(!matched)
+    {
+        NSLog(@"Match Failed -1 point");
+        [self calculateScore:(NSInteger)-1];
+    }
+    
+    return matched;
 }
+
+- (void) calculateScore: (NSInteger) handScore
+{
+    self.score+=handScore;
+}
+
 @end

@@ -11,7 +11,6 @@
 #import "CGMatchingHand.h"
 #import "CGMatchingCard.h"
 #import "CGMatchingView.h"
-#import "CGMatchingPlay.h"
 
 @interface CGMatchingViewController ()
 @property (nonatomic,strong) CGMatchingDeck * fullDeck;
@@ -40,6 +39,24 @@
     return _selectedCards;
 }
 
+- (void) Start
+{
+    self.fullDeck = [[CGMatchingDeck alloc] init];
+    self.playingHand = [[CGMatchingHand alloc] init];
+    // Do any additional setup after loading the view.
+    self.fullDeck = [self.fullDeck createMatchingDeck];
+    self.playingHand = [self.playingHand dealHand:self.fullDeck];
+    [self updateUI];
+
+}
+
+- (IBAction)RedealTouch:(UIButton *)sender
+{
+    self.fullDeck=nil;
+    self.playingHand=nil;
+    [self Start];
+}
+
 #define MATCHCOUNT 2
 - (IBAction)CardTouch:(UIButton *)sender {
     if([sender isKindOfClass:[UIButton class]])
@@ -47,15 +64,14 @@
         NSLog(@"Inside Card Touch = %@ button was touched",sender.currentTitle );
         NSInteger i=[self findCardInHand:sender InHand:[self playingHand]];
         if(i>=0) {
-            NSLog(@"Found %@ at index %d",sender.currentTitle,(NSInteger) i);
+            NSLog(@"Found %@ at index %ld",sender.currentTitle,(long) i);
             NSLog(@"%@",[[self.playingHand.matchingHand objectAtIndex:i] contents]);
             CGMatchingCard * card= [self.playingHand.matchingHand objectAtIndex: i];
             card.cardChosen=YES;
             [self.selectedCards addObject:card];
             sender.backgroundColor=[UIColor grayColor];
             if(self.selectedCards.count == MATCHCOUNT){
-                CGMatchingPlay *cgPlay=[[CGMatchingPlay alloc] init];
-                if([cgPlay matchCards:self.selectedCards]) {
+                if([self.playingHand matchCards:self.selectedCards]) {
                     NSLog(@"selected cards matched");
                     NSLog(@"Flip cards on table");
                 }
@@ -94,15 +110,9 @@
 
 - (void)viewDidLoad
 {
-    CGMatchingDeck * deck = [[CGMatchingDeck alloc] init];
-    self.fullDeck = [[CGMatchingDeck alloc] init];
-    CGMatchingHand * hand = [[CGMatchingHand alloc] init];
-    self.playingHand = [[CGMatchingHand alloc] init];
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.fullDeck = [deck createMatchingDeck];
-    self.playingHand = [hand dealHand:self.fullDeck];
-    [self updateUI];
+    [self Start];
 }
 
 - (void) updateUI
@@ -118,6 +128,8 @@
         [self.TableCard[i] setTitle:Title forState:UIControlStateNormal];
          
     }
+    self.ScoreLabel.text=@"";
+    self.ScoreLabel.text=[self.ScoreLabel.text stringByAppendingFormat: @"Score test : %ld",(long)self.playingHand.score];
 }
 
 - (void)didReceiveMemoryWarning
