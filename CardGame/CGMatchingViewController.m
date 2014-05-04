@@ -86,6 +86,7 @@
             }
         }
     }
+    [self updateUI];
 }
 
 - (NSInteger)findCardInHand:(UIButton *)sender InHand:(CGMatchingHand *)hand
@@ -123,10 +124,19 @@
               [self.playingHand.matchingHand[i] cardRank] ,[self.playingHand.matchingHand[i] cardSuit]);
         NSString * Title=[[NSString alloc] initWithFormat:@"%@ %@",[self.playingHand.matchingHand[i] cardRank] ,[self.playingHand.matchingHand[i] cardSuit]];
         ((CGMatchingCard *)self.playingHand.matchingHand[i]).cardViewButton=self.TableCard[i];
-        [self.TableCard[i] setBackgroundColor:[UIColor yellowColor]];
-
         [self.TableCard[i] setTitle:Title forState:UIControlStateNormal];
-         
+        if([self.playingHand.matchingHand[i] cardChosen])
+        {
+//            [self.TableCard[i] setTitle:Title forState:UIControlStateNormal];
+            [self.TableCard[i] setBackgroundColor:[UIColor whiteColor]];
+            [self.TableCard[i] setBackgroundImage:nil forState:UIControlStateNormal];
+        }
+        else
+        {
+            [self.TableCard[i] setTitle:@"" forState:UIControlStateNormal];
+            UIImage * imageName=[UIImage imageNamed:@"playingcardback.png"];
+            [(UIButton *)self.TableCard[i] setBackgroundImage:imageName forState:UIControlStateNormal];
+        }
     }
     self.ScoreLabel.text=@"";
     self.ScoreLabel.text=[self.ScoreLabel.text stringByAppendingFormat: @"Score test : %ld",(long)self.playingHand.score];

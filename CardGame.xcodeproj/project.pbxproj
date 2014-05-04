@@ -34,6 +34,7 @@
 		F1698F1419133BDC00DEE18B /* CGMatchingHand.m in Sources */ = {isa = PBXBuildFile; fileRef = F1698F1319133BDC00DEE18B /* CGMatchingHand.m */; };
 		F1698F1719133BEB00DEE18B /* CGSetHand.m in Sources */ = {isa = PBXBuildFile; fileRef = F1698F1619133BEB00DEE18B /* CGSetHand.m */; };
 		F1698F1D1913402400DEE18B /* CGSetPlay.m in Sources */ = {isa = PBXBuildFile; fileRef = F1698F1C1913402400DEE18B /* CGSetPlay.m */; };
+		F176905C1916B28900E9CB8F /* playingcardback.png in Resources */ = {isa = PBXBuildFile; fileRef = F176905B1916B28900E9CB8F /* playingcardback.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +93,7 @@
 		F1698F1619133BEB00DEE18B /* CGSetHand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGSetHand.m; sourceTree = "<group>"; };
 		F1698F1B1913402400DEE18B /* CGSetPlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGSetPlay.h; sourceTree = "<group>"; };
 		F1698F1C1913402400DEE18B /* CGSetPlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGSetPlay.m; sourceTree = "<group>"; };
+		F176905B1916B28900E9CB8F /* playingcardback.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playingcardback.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,6 +167,7 @@
 			children = (
 				F1698ED71913343400DEE18B /* Images.xcassets */,
 				F1698ECE1913343400DEE18B /* CGAppDelegate.h */,
+				F176905B1916B28900E9CB8F /* playingcardback.png */,
 				F1698ECF1913343400DEE18B /* CGAppDelegate.m */,
 				F1698EC71913343400DEE18B /* CardGame-Info.plist */,
 				F1698EC81913343400DEE18B /* InfoPlist.strings */,
@@ -320,6 +323,7 @@
 			files = (
 				F1698ED81913343400DEE18B /* Images.xcassets in Resources */,
 				F1698ECA1913343400DEE18B /* InfoPlist.strings in Resources */,
+				F176905C1916B28900E9CB8F /* playingcardback.png in Resources */,
 				F1698ED31913343400DEE18B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

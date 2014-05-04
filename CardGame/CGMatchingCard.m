@@ -21,7 +21,8 @@
 {
     if(!_validSuits)
     {
-        _validSuits = [NSArray arrayWithObjects: @"S",@"H",@"D",@"C",nil];
+
+        _validSuits = [NSArray arrayWithObjects: @"♤",@"♡",@"♢",@"♧",nil];
     }
     return _validSuits;
 }
