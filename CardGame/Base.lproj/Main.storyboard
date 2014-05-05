@@ -119,11 +119,21 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EJd-yq-FCq" customClass="CGCardView">
+                                <rect key="frame" x="88" y="236" width="145" height="216"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="60G-U4-TSJ" appends="YES" id="a2m-Gj-BPt"/>
+                                </connections>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Matching" id="BBv-f8-KFh"/>
                     <connections>
+                        <outlet property="CGCardViewSubController" destination="EJd-yq-FCq" id="Tjo-j9-1rn"/>
                         <outlet property="ScoreLabel" destination="HPp-5I-Aog" id="loc-cV-D6X"/>
                         <outletCollection property="TableCard" destination="mJF-mB-cyO" id="5gy-gN-NYL"/>
                         <outletCollection property="TableCard" destination="qgC-dU-VHN" id="HKZ-YC-sdp"/>
@@ -134,6 +144,16 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="right" id="60G-U4-TSJ">
+                    <connections>
+                        <action selector="swipe:" destination="vXZ-lx-hvc" id="RAN-md-kKx"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <pinchGestureRecognizer id="1TD-g8-KRw">
+                    <connections>
+                        <action selector="pinch:" destination="vXZ-lx-hvc" id="cax-71-BIP"/>
+                    </connections>
+                </pinchGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1851" y="71"/>
         </scene>

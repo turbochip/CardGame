@@ -22,7 +22,7 @@
     if(!_validSuits)
     {
 
-        _validSuits = [NSArray arrayWithObjects: @"♤",@"♡",@"♢",@"♧",nil];
+        _validSuits = [NSArray arrayWithObjects: @"♠",@"♥",@"♦",@"♣",nil];
     }
     return _validSuits;
 }

@@ -15,8 +15,12 @@
 
 @property (strong, nonatomic) IBOutlet UILabel *ScoreLabel;
 
+@property (strong, nonatomic) IBOutletCollection(UIView) NSArray *TableCardView;
+
+- (void)pinch:(UIPinchGestureRecognizer *)gesture;
 - (NSMutableArray *) selectedCards;
 - (void) updateUI;
 - (void) Start;
 - (NSInteger) findCardInHand: (UIButton *) title InHand: (CGMatchingHand *) hand;
+
 @end

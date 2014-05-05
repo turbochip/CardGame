@@ -11,11 +11,15 @@
 #import "CGMatchingHand.h"
 #import "CGMatchingCard.h"
 #import "CGMatchingView.h"
+#import "CGCardView.h"
 
 @interface CGMatchingViewController ()
 @property (nonatomic,strong) CGMatchingDeck * fullDeck;
 @property (nonatomic,strong) CGMatchingHand * playingHand;
 @property (nonatomic,strong) NSMutableArray * selectedCards;
+@property (nonatomic,strong) CGMatchingCard * matchingCardClass;
+
+@property (strong, nonatomic) IBOutlet CGCardView *CGCardViewSubController;
 @end
 
 @implementation CGMatchingViewController
@@ -43,6 +47,7 @@
 {
     self.fullDeck = [[CGMatchingDeck alloc] init];
     self.playingHand = [[CGMatchingHand alloc] init];
+    self.matchingCardClass=[[CGMatchingCard alloc] init];
     // Do any additional setup after loading the view.
     self.fullDeck = [self.fullDeck createMatchingDeck];
     self.playingHand = [self.playingHand dealHand:self.fullDeck];
@@ -55,6 +60,31 @@
     self.fullDeck=nil;
     self.playingHand=nil;
     [self Start];
+}
+
+- (NSInteger) stringRankToInteger: (NSString *) strrank
+{
+    NSInteger intrank;
+    for(intrank=0;intrank<self.matchingCardClass.validRanks.count;intrank++)
+    {
+        if([self.matchingCardClass.validRanks[intrank] isEqualToString:strrank]){
+            break;
+        }
+    }
+    return intrank+1;
+}
+
+- (IBAction)swipe:(UISwipeGestureRecognizer *)sender
+{
+    self.CGCardViewSubController.faceUp = !self.CGCardViewSubController.faceUp;
+}
+
+- (IBAction)pinch:(UIPinchGestureRecognizer *)sender {
+    if ((sender.state == UIGestureRecognizerStateChanged) ||
+        (sender.state == UIGestureRecognizerStateEnded)) {
+        self.CGCardViewSubController.faceCardScaleFactor *= sender.scale;
+        sender.scale = 1.0;
+    }
 }
 
 #define MATCHCOUNT 2
@@ -70,6 +100,10 @@
             card.cardChosen=YES;
             [self.selectedCards addObject:card];
             sender.backgroundColor=[UIColor grayColor];
+
+            self.CGCardViewSubController.rank=[self stringRankToInteger:card.cardRank] ;
+            self.CGCardViewSubController.suit=card.cardSuit;
+
             if(self.selectedCards.count == MATCHCOUNT){
                 if([self.playingHand matchCards:self.selectedCards]) {
                     NSLog(@"selected cards matched");
