@@ -35,6 +35,7 @@
 		F1698F1719133BEB00DEE18B /* CGSetHand.m in Sources */ = {isa = PBXBuildFile; fileRef = F1698F1619133BEB00DEE18B /* CGSetHand.m */; };
 		F1698F1D1913402400DEE18B /* CGSetPlay.m in Sources */ = {isa = PBXBuildFile; fileRef = F1698F1C1913402400DEE18B /* CGSetPlay.m */; };
 		F176905C1916B28900E9CB8F /* playingcardback.png in Resources */ = {isa = PBXBuildFile; fileRef = F176905B1916B28900E9CB8F /* playingcardback.png */; };
+		F18E83291917F3A30012E796 /* CGSetCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = F18E83281917F3A30012E796 /* CGSetCardView.m */; };
 		F1C11BEF1916EC2300182501 /* CGCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C11BEE1916EC2300182501 /* CGCardView.m */; };
 /* End PBXBuildFile section */
 
@@ -95,6 +96,8 @@
 		F1698F1B1913402400DEE18B /* CGSetPlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGSetPlay.h; sourceTree = "<group>"; };
 		F1698F1C1913402400DEE18B /* CGSetPlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGSetPlay.m; sourceTree = "<group>"; };
 		F176905B1916B28900E9CB8F /* playingcardback.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playingcardback.png; sourceTree = "<group>"; };
+		F18E83271917F3A30012E796 /* CGSetCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGSetCardView.h; sourceTree = "<group>"; };
+		F18E83281917F3A30012E796 /* CGSetCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGSetCardView.m; sourceTree = "<group>"; };
 		F1C11BED1916EC2300182501 /* CGCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGCardView.h; sourceTree = "<group>"; };
 		F1C11BEE1916EC2300182501 /* CGCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGCardView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -245,6 +248,8 @@
 				F14D4F921914627200E1061A /* CGMatchingView.m */,
 				F1C11BED1916EC2300182501 /* CGCardView.h */,
 				F1C11BEE1916EC2300182501 /* CGCardView.m */,
+				F18E83271917F3A30012E796 /* CGSetCardView.h */,
+				F18E83281917F3A30012E796 /* CGSetCardView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -363,6 +368,7 @@
 				F1698ECC1913343400DEE18B /* main.m in Sources */,
 				F1698F021913394900DEE18B /* CGDeck.m in Sources */,
 				F1698ED61913343400DEE18B /* CGViewController.m in Sources */,
+				F18E83291917F3A30012E796 /* CGSetCardView.m in Sources */,
 				F1698F0819133B7D00DEE18B /* CGMatchingCard.m in Sources */,
 				F1698F1119133BC200DEE18B /* CGSetDeck.m in Sources */,
 			);

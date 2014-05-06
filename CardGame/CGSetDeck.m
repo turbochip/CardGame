@@ -7,11 +7,26 @@
 //
 
 #import "CGSetDeck.h"
+#import "CGSetCard.h"
+@interface CGSetDeck ()
+
+@property (nonatomic, weak) CGSetCard * setcard;
+
+@end
 
 @implementation CGSetDeck
 
-- (NSMutableString *)createSetDeckof: (CGCard *) card
+- (CGSetDeck *)createSetDeckof: (CGSetCard *) card
 {
-    return nil;
+    self.deckOfCards = [[NSMutableArray alloc] init];
+    for(NSNumber *shape in card.ShapeDict.allKeys)
+        for (NSNumber *fill in card.FillDict.allKeys)
+            for(int i=0;i<3;i++)
+                for(UIColor *color in card.ColorDict.allKeys)
+                {
+                    [self.deckOfCards addObject:[card createCardWithColor:color Shape:shape Fill:fill Quantity:i]];
+                }
+    NSLog(@"Done Adding Full Deck");
+    return self;
 }
 @end

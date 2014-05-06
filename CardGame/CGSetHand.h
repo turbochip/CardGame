@@ -10,8 +10,7 @@
 #include "CGSetCard.h"
 #include "CGSetDeck.h"
 @interface CGSetHand : CGHand
-- (NSMutableArray *) dealHand: (CGSetDeck *) cardDeck;
+- (CGSetHand *) dealHand: (CGSetDeck *) cardDeck;
 - (CGSetCard *) drawRandomCard: (CGSetDeck *) cardDeck;
-- (void) removeCard: (CGSetCard *) card FromHand: (NSMutableArray *) hand;
 
 @end

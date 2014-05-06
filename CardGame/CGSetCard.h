@@ -7,10 +7,20 @@
 //
 
 #import "CGCard.h"
+#import "CGSetCardView.h"
 
 @interface CGSetCard : CGCard
-@property (nonatomic,strong) NSString *cardShape;
-@property (nonatomic,strong) UIColor *cardColor;
-@property (nonatomic) NSInteger cardFill;
+@property (nonatomic) NSNumber *cardShape;
+@property (nonatomic) UIColor *cardColor;
+@property (nonatomic) NSNumber *cardFill;
 @property (nonatomic) NSInteger cardQuantity;
+@property (nonatomic,strong) NSString *contents;
+@property (nonatomic,weak) CGSetCardView *cardViewButton;
+@property (nonatomic,strong) NSDictionary *FillDict;
+@property (nonatomic,strong) NSDictionary *ColorDict;
+@property (nonatomic,strong) NSDictionary *ShapeDict;
+
+- (CGCard *) createCardWithColor: (UIColor *) color Shape: (NSNumber *) shape Fill: (NSNumber*) fill Quantity: (NSInteger) quantity;
+
+
 @end

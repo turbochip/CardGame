@@ -8,19 +8,30 @@
 
 #import "CGCardView.h"
 
-@interface CGCardView()
-@end
-
 @implementation CGCardView
 
 #define DEFAULT_FACE_CARD_SCALE_FACTOR 0.90
+#define DEFAULT_CARD_SCALE_FACTOR 1.0
 
 @synthesize faceCardScaleFactor = _faceCardScaleFactor;
+@synthesize cardScaleFactor = _cardScaleFactor;
+
+- (CGFloat) cardScaleFactor
+{
+    if(!_cardScaleFactor) _cardScaleFactor=DEFAULT_CARD_SCALE_FACTOR;
+    return _cardScaleFactor;
+}
 
 - (CGFloat)faceCardScaleFactor
 {
     if (!_faceCardScaleFactor) _faceCardScaleFactor = DEFAULT_FACE_CARD_SCALE_FACTOR;
     return _faceCardScaleFactor;
+}
+
+- (void)setCardScaleFactor:(CGFloat)cardScaleFactor
+{
+    _cardScaleFactor=cardScaleFactor;
+    [self setNeedsDisplay];
 }
 
 - (void)setFaceCardScaleFactor:(CGFloat)faceCardScaleFactor
@@ -52,6 +63,18 @@
     return @[@"?",@"A",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"J",@"Q",@"K"][self.rank];
 }
 
+- (void)pinch:(UIPinchGestureRecognizer *)gesture
+{
+    if ((gesture.state == UIGestureRecognizerStateChanged) ||
+        (gesture.state == UIGestureRecognizerStateEnded)) {
+        self.cardScaleFactor *= gesture.scale;
+        gesture.scale = 1.0;
+        //self.cardScaleFactor=1.0;
+    }
+}
+
+
+
 #define CORNER_FONT_STANDARD_HEIGHT 180.0
 #define CORNER_RADIUS 12.0
 
@@ -64,6 +87,12 @@
 - (void)drawRect:(CGRect)rect
 {
     // Drawing code
+    CGRect myBounds=self.bounds;
+    myBounds.origin.x*=self.cardScaleFactor;
+    myBounds.origin.y*=self.cardScaleFactor;
+    myBounds.size.height*=self.cardScaleFactor;
+    myBounds.size.width*=self.cardScaleFactor;
+    self.bounds=myBounds;
     UIBezierPath *roundedRect = [UIBezierPath bezierPathWithRoundedRect:self.bounds cornerRadius:[self cornerRadius]];
     
     [roundedRect addClip];

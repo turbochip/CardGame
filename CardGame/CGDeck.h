@@ -13,5 +13,4 @@
 @property (strong,nonatomic) NSMutableArray *deckOfCards;    //of cards
 @property (nonatomic) NSInteger deckSize;
 
--(NSMutableArray *)createDeckof: (id) card;
 @end

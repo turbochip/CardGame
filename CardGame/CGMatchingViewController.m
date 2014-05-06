@@ -48,6 +48,8 @@
     self.fullDeck = [[CGMatchingDeck alloc] init];
     self.playingHand = [[CGMatchingHand alloc] init];
     self.matchingCardClass=[[CGMatchingCard alloc] init];
+
+    
     // Do any additional setup after loading the view.
     self.fullDeck = [self.fullDeck createMatchingDeck];
     self.playingHand = [self.playingHand dealHand:self.fullDeck];
@@ -77,14 +79,6 @@
 - (IBAction)swipe:(UISwipeGestureRecognizer *)sender
 {
     self.CGCardViewSubController.faceUp = !self.CGCardViewSubController.faceUp;
-}
-
-- (IBAction)pinch:(UIPinchGestureRecognizer *)sender {
-    if ((sender.state == UIGestureRecognizerStateChanged) ||
-        (sender.state == UIGestureRecognizerStateEnded)) {
-        self.CGCardViewSubController.faceCardScaleFactor *= sender.scale;
-        sender.scale = 1.0;
-    }
 }
 
 #define MATCHCOUNT 2
@@ -148,6 +142,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self Start];
+    [self.CGCardViewSubController addGestureRecognizer:[[UIPinchGestureRecognizer alloc] initWithTarget:self.CGCardViewSubController action:@selector(pinch:)]];
 }
 
 - (void) updateUI

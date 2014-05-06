@@ -7,18 +7,31 @@
 //
 
 #import "CGSetHand.h"
+@interface CGSetHand ()
+
+@end
 
 @implementation CGSetHand
-- (NSMutableArray *) dealHand: (CGSetDeck *) cardDeck
+#define HANDSIZE 15
+
+- (CGSetHand *) dealHand: (CGSetDeck *) cardDeck
 {
-    return nil;
+    for(int i=0;i<HANDSIZE;i++)
+        [self.handOfCards addObject:[self drawRandomCard:cardDeck]];
+    return self;
 }
+
 - (CGSetCard *) drawRandomCard: (CGSetDeck *) cardDeck
 {
-    return nil;
-}
-- (void) removeCard: (CGSetCard *) card FromHand: (NSMutableArray *) hand
-{
+    CGSetCard *randomCard = nil;
     
+    if (cardDeck.deckSize){
+        unsigned index = arc4random() % cardDeck.deckOfCards.count;
+        randomCard = cardDeck.deckOfCards[index];
+        [cardDeck.deckOfCards removeObjectAtIndex:index];
+        NSLog(@"Random Card is %@",randomCard.contents);
+    }
+    return randomCard;
 }
+
 @end

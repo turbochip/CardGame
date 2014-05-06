@@ -17,7 +17,6 @@
 
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray *TableCardView;
 
-- (void)pinch:(UIPinchGestureRecognizer *)gesture;
 - (NSMutableArray *) selectedCards;
 - (void) updateUI;
 - (void) Start;

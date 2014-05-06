@@ -7,8 +7,8 @@
 //
 
 #import "CGDeck.h"
-#import "CGCard.h"
+#import "CGSetCard.h"
 @interface CGSetDeck : CGDeck
 
-- (NSMutableString *)createSetDeckof: (CGCard *) card;
+- (CGSetDeck *)createSetDeckof: (CGSetCard *) card;
 @end

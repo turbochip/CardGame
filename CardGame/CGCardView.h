@@ -13,6 +13,10 @@
 @property (nonatomic,weak) NSString * suit;
 @property (nonatomic) BOOL faceUp;
 @property (nonatomic) CGFloat faceCardScaleFactor;
+@property (nonatomic) CGFloat cardScaleFactor;
+
+- (void)pinch:(UIPinchGestureRecognizer *)gesture;
+
 
 
 @end

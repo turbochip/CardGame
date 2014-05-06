@@ -9,9 +9,16 @@
 #import "CGDeck.h"
 
 @implementation CGDeck
--(NSMutableArray *)createDeckof: (id) card
+
+- (NSMutableArray *) deckOfCards
 {
-    return nil;
+    if(!_deckOfCards) _deckOfCards=[[NSMutableArray alloc] init];
+    return _deckOfCards;
+}
+
+- (NSInteger) deckSize
+{
+    return [self.deckOfCards count];
 }
 
 @end

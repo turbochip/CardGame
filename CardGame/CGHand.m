@@ -9,10 +9,6 @@
 #import "CGHand.h"
 
 @implementation CGHand
--(NSMutableArray *) dealHandFrom: (id) deckOfCards
-{
-    return nil;
-}
 -(NSMutableArray *) handOfCards
 {
    if(!_handOfCards)
