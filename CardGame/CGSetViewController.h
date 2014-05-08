@@ -7,7 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CGSetCard.h"
+#import "CGSetDeck.h"
+#import "CGSetHand.h"
 
 @interface CGSetViewController : UIViewController
+@property (nonatomic,strong) CGSetDeck * fullDeck;
+@property (nonatomic,strong) CGSetCard * setCard;
+@property (nonatomic,strong) CGSetHand * hand;
+@property (strong, nonatomic) IBOutletCollection(CGSetCardView) NSArray *TableCards;
 
 @end

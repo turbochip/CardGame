@@ -42,7 +42,7 @@
 {
     CGMatchingCard *randomCard = nil;
     
-    if (cardDeck.deckSize){
+    if (cardDeck.deckOfPlayingCards.count){
         unsigned index = arc4random() % cardDeck.deckOfPlayingCards.count;
         randomCard = cardDeck.deckOfPlayingCards[index];
         [cardDeck.deckOfPlayingCards removeObjectAtIndex:index];

@@ -15,6 +15,7 @@
 @property (nonatomic) NSNumber *cardFill;
 @property (nonatomic) NSInteger cardQuantity;
 @property (nonatomic,strong) NSString *contents;
+@property (nonatomic) BOOL isMatched;
 @property (nonatomic,weak) CGSetCardView *cardViewButton;
 @property (nonatomic,strong) NSDictionary *FillDict;
 @property (nonatomic,strong) NSDictionary *ColorDict;

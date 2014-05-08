@@ -9,6 +9,7 @@
 #import "CGDeck.h"
 
 @implementation CGDeck
+@synthesize deckOfCards = _deckOfCards;
 
 - (NSMutableArray *) deckOfCards
 {
@@ -18,7 +19,6 @@
 
 - (NSInteger) deckSize
 {
-    return [self.deckOfCards count];
+    return self.deckOfCards.count;
 }
-
 @end
