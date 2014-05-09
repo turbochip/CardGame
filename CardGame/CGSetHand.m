@@ -29,7 +29,7 @@
         unsigned index = arc4random() % cardDeck.deckOfCards.count;
         randomCard = cardDeck.deckOfCards[index];
         [cardDeck.deckOfCards removeObjectAtIndex:index];
-        NSLog(@"Random Card is %@",randomCard.contents);
+//        NSLog(@"Random Card is %@",randomCard.contents);
     }
     return randomCard;
 }

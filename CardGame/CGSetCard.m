@@ -75,11 +75,12 @@ typedef NS_ENUM(NSUInteger, Shape) {
     newCard.cardShape=shape;
     newCard.cardFill=fill;
     newCard.cardQuantity=quantity+1;
-    newCard.contents=[[NSString alloc] initWithFormat:@"%ld %@ %@ %@",
+    /*newCard.contents=[[NSString alloc] initWithFormat:@"%ld %@ %@ %@",
                       newCard.cardQuantity,
                       [self.ColorDict objectForKey:newCard.cardColor],
                       [self.FillDict objectForKey:newCard.cardFill],
-                      [self.ShapeDict objectForKey:newCard.cardShape]];
+                      [self.ShapeDict objectForKey:newCard.cardShape]]; 
+     */
     newCard.cardViewButton=nil;
     NSLog(@"Creating %@",newCard.contents);
     return newCard;

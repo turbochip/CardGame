@@ -17,6 +17,7 @@
 //@property (nonatomic,strong) CGSetCard * setCard;
 //@property (nonatomic,strong) CGSetHand * hand;
 //@property (strong, nonatomic) IBOutletCollection(CGSetCardView) NSArray *TableCards;
+@property (strong, nonatomic) IBOutletCollection(CGSetCardView) NSArray *tableCardTap;
 @property (nonatomic,strong) CGSetCardView *cardView;
 @end
 
@@ -31,6 +32,7 @@
     }
     return self;
 }
+
 
 - (void)start
 {
@@ -48,7 +50,21 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    for(int i=0;i<self.TableCards.count;i++) {
+        UIView *card = self.TableCards[i];
+//        CGSetCard * handCard=[self.hand.handOfCards objectAtIndex:i];
+        UITapGestureRecognizer * tapRecognizer  = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tableCardTap:)];
+        [tapRecognizer setNumberOfTapsRequired:1];
+        [tapRecognizer setNumberOfTouchesRequired:1];
+        [card addGestureRecognizer:tapRecognizer];
+    }
     [self start];
+}
+
+- (IBAction)tableCardTap:(UITapGestureRecognizer *)sender
+{
+    NSLog(@"Sender=%@",sender.description);
+    sender.view.backgroundColor=[UIColor grayColor];
 }
 
 - (void)updateUI
@@ -60,17 +76,12 @@
             // show card facedown
         }
         else {
-            // show card contents as title for now
-            currentCard.cardViewButton.backgroundColor=currentCard.cardColor;
-            
             currentCard.cardViewButton.alpha=1;
-            NSMutableAttributedString *attDisp = [[NSMutableAttributedString alloc] initWithString:currentCard.contents];
-            [attDisp addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(0,[currentCard.contents length])];
-            [attDisp addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:8] range:NSMakeRange(0, [attDisp.string length])];
-            //[attDisp drawAtPoint:CGPointMake(0,0)];
-            currentCard.cardViewButton.cardContent=attDisp.mutableCopy;
-            [attDisp drawAtPoint:[currentCard.cardViewButton center]];
-            NSLog(@"Drawing %@ at %f,%f",attDisp.string,currentCard.cardViewButton.center.x,currentCard.cardViewButton.center.y);
+            currentCard.cardViewButton.cardQuantity=[NSNumber numberWithInteger:[ currentCard cardQuantity]];
+            currentCard.cardViewButton.cardColor=currentCard.cardColor;
+            currentCard.cardViewButton.cardFill=currentCard.cardFill;
+            currentCard.cardViewButton.cardShape=currentCard.cardShape;
+            
             if(currentCard.cardChosen){
                 // set card background to gray
                 [currentCard cardViewButton].backgroundColor=[UIColor grayColor];

@@ -19,7 +19,7 @@
 -(NSString *)contents
 {
     if(!_contents) {
-        NSString * _contents=@"";
+        _contents=@"";
     }
     return _contents;
 }

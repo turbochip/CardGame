@@ -17,6 +17,7 @@
 @property (nonatomic,strong) NSString *contents;
 @property (nonatomic) BOOL isMatched;
 @property (nonatomic,weak) CGSetCardView *cardViewButton;
+@property (nonatomic,strong) UITapGestureRecognizer* tapRecognizer;
 @property (nonatomic,strong) NSDictionary *FillDict;
 @property (nonatomic,strong) NSDictionary *ColorDict;
 @property (nonatomic,strong) NSDictionary *ShapeDict;
