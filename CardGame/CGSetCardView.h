@@ -13,7 +13,7 @@
 @property (nonatomic,strong) UIColor * cardColor;
 @property (nonatomic,strong) NSNumber * cardShape;
 @property (nonatomic,strong) NSNumber * cardFill;
-@property (nonatomic,strong) NSNumber * cardQuantity;
+@property (nonatomic) NSInteger cardQuantity;
 @property (nonatomic) BOOL cardChosen;
 @property (nonatomic) BOOL cardMatched;
 

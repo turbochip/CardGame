@@ -13,12 +13,10 @@
 #import "CGSetCardView.h"
 
 @interface CGSetViewController ()
-//@property (nonatomic,strong) CGSetDeck * fullDeck;
-//@property (nonatomic,strong) CGSetCard * setCard;
-//@property (nonatomic,strong) CGSetHand * hand;
-//@property (strong, nonatomic) IBOutletCollection(CGSetCardView) NSArray *TableCards;
 @property (strong, nonatomic) IBOutletCollection(CGSetCardView) NSArray *tableCardTap;
 @property (nonatomic,strong) CGSetCardView *cardView;
+
+- (CGSetCard *) findCardInHand: (UIView *) tableCard;
 @end
 
 @implementation CGSetViewController
@@ -49,10 +47,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     for(int i=0;i<self.TableCards.count;i++) {
         UIView *card = self.TableCards[i];
-//        CGSetCard * handCard=[self.hand.handOfCards objectAtIndex:i];
         UITapGestureRecognizer * tapRecognizer  = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tableCardTap:)];
         [tapRecognizer setNumberOfTapsRequired:1];
         [tapRecognizer setNumberOfTouchesRequired:1];
@@ -61,10 +57,65 @@
     [self start];
 }
 
+- (CGSetHand *) selectedCards
+{
+    if(!_selectedCards) _selectedCards=[[CGSetHand alloc] init];
+    return _selectedCards;
+}
+
 - (IBAction)tableCardTap:(UITapGestureRecognizer *)sender
 {
     NSLog(@"Sender=%@",sender.description);
-    sender.view.backgroundColor=[UIColor grayColor];
+    if(sender.view.backgroundColor!=[UIColor grayColor])
+    {
+        if(self.selectedCards.handOfCards.count<3)
+        {
+            sender.view.backgroundColor=[UIColor grayColor];
+            [self.selectedCards.handOfCards addObject:[self findCardInHand:sender.view]];
+            if(self.selectedCards.handOfCards.count>2)
+            {
+                //check for a match
+                NSLog(@"checking for a match count=%ld",self.selectedCards.handOfCards.count);
+                BOOL result=[self.selectedCards match:self.selectedCards];
+                if(!result) {
+                    for(CGSetCard * card in self.selectedCards.handOfCards)
+                        card.cardViewButton.backgroundColor=[UIColor whiteColor];
+                } else {
+                    for(CGSetCard * card in self.selectedCards.handOfCards)
+                    {
+                        NSInteger randback=arc4random() % 3;
+                        switch (randback) {
+                            case 1:
+                            {
+                                UIImage *img= [UIImage imageNamed:@"MerckLogo.png"];
+                                [card.cardViewButton setBackgroundImage:img forState:UIControlStateNormal];
+                                break;
+                            }
+                            case 2:
+                                break;
+                            case 3:
+                                break;
+                        }
+
+                    }
+                }
+                self.selectedCards=nil;
+            }
+        }
+    }
+}
+
+- (CGSetCard *) findCardInHand: (UIView *) tableCard
+{
+    CGSetCard *playingCard;
+    for (int i=0;i<self.hand.handOfCards.count;i++)
+        if([[self.hand.handOfCards objectAtIndex:i] cardViewButton]==tableCard)
+        {
+            ((CGSetCard *)self.hand.handOfCards[i]).cardChosen=YES;
+            NSLog(@"in findCardInHand %d", [(CGSetCard*) self.hand.handOfCards[i] cardChosen]);
+            playingCard=[self.hand.handOfCards objectAtIndex:i];
+        }
+    return playingCard;
 }
 
 - (void)updateUI
@@ -77,7 +128,7 @@
         }
         else {
             currentCard.cardViewButton.alpha=1;
-            currentCard.cardViewButton.cardQuantity=[NSNumber numberWithInteger:[ currentCard cardQuantity]];
+            currentCard.cardViewButton.cardQuantity=[currentCard cardQuantity];
             currentCard.cardViewButton.cardColor=currentCard.cardColor;
             currentCard.cardViewButton.cardFill=currentCard.cardFill;
             currentCard.cardViewButton.cardShape=currentCard.cardShape;

@@ -54,7 +54,7 @@
     [self setNeedsDisplay];
 }
 
-- (void) setCardQuantity:(NSNumber *) qty
+- (void) setCardQuantity:(NSInteger) qty
 {
     _cardQuantity=qty;
     [self setNeedsDisplay];
@@ -77,21 +77,25 @@
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect
 {
-    NSAttributedString *shapeToDraw;
-    // Drawing code
-    switch(self.cardShape.intValue) {
-        case 1:
-            shapeToDraw=[self drawCircle];
-            break;
-        case 2:
-            shapeToDraw=[self drawDiamond];
-            break;
-        case 3:
-            shapeToDraw=[self drawSquiggle];
-            break;
+    if(!self.cardMatched)
+    {
+        NSAttributedString *shapeToDraw;
+        // Drawing code
+        switch(self.cardShape.intValue) {
+            case 1:
+                shapeToDraw=[self drawCircle];
+                break;
+            case 2:
+                shapeToDraw=[self drawDiamond];
+                break;
+            case 3:
+                shapeToDraw=[self drawSquiggle];
+                break;
+        }
+        NSLog(@"self.stringToDraw class is %@",[self.stringToDraw.class description]);
+        [(NSAttributedString*)self.stringToDraw drawAtPoint:CGPointMake(0, 0)];
+    } else {
     }
-    NSLog(@"self.stringToDraw class is %@",[self.stringToDraw.class description]);
-    [(NSAttributedString*)self.stringToDraw drawAtPoint:CGPointMake(0, 0)];
 }
 
 - (NSMutableAttributedString *) drawCircle
@@ -99,12 +103,14 @@
     NSString *shape=@"○";
     NSString *tempstr=@"";
 
-    for(int i=0;i<self.cardQuantity.intValue;i++) {
+    for(int i=0;i<self.cardQuantity;i++) {
         tempstr = [tempstr stringByAppendingString:shape];
     }
     self.stringToDraw=[[NSMutableAttributedString alloc] initWithString:tempstr];
     NSLog(@"Color=%@",self.cardColor.description);
     [self.stringToDraw addAttribute:NSForegroundColorAttributeName value:(UIColor*) self.cardColor range:NSMakeRange(0,[self.stringToDraw length])];
+    [self.stringToDraw addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Times New Roman" size:18] range:NSMakeRange(0, [self.stringToDraw length])];
+    [self addFillToShape];
     return self.stringToDraw;
 }
 
@@ -114,12 +120,14 @@
     NSString *shape=@"☐";
     NSString *tempstr=@"";
     
-    for(int i=0;i<self.cardQuantity.intValue;i++) {
+    for(int i=0;i<self.cardQuantity;i++) {
         tempstr = [tempstr stringByAppendingString:shape];
     }
     self.stringToDraw=[[NSMutableAttributedString alloc] initWithString:tempstr];
     NSLog(@"Color=%@",self.cardColor.description);
     [self.stringToDraw addAttribute:NSForegroundColorAttributeName value:(UIColor*) self.cardColor range:NSMakeRange(0,[self.stringToDraw length])];
+    [self.stringToDraw addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Times New Roman" size:18] range:NSMakeRange(0, [self.stringToDraw length])];
+    [self addFillToShape];
     return self.stringToDraw;
 }
 
@@ -129,7 +137,7 @@
     NSString *shape=@"△";
     NSString *tempstr=@"";
     
-    for(int i=0;i<self.cardQuantity.intValue;i++) {
+    for(int i=0;i<self.cardQuantity;i++) {
         tempstr = [tempstr stringByAppendingString:shape];
     }
     self.stringToDraw=[[NSMutableAttributedString alloc] initWithString:tempstr];
