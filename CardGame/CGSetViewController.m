@@ -16,7 +16,8 @@
 @property (strong, nonatomic) IBOutletCollection(CGSetCardView) NSArray *tableCardTap;
 @property (nonatomic,strong) CGSetCardView *cardView;
 
-- (CGSetCard *) findCardInHand: (UIView *) tableCard;
+- (CGSetHand *) buildArrayFromReferenceArray: (NSArray *) sourceArray;
+- (NSInteger) findCardInHand: (UIView *) tableCard;
 @end
 
 @implementation CGSetViewController
@@ -53,38 +54,106 @@
         [tapRecognizer setNumberOfTapsRequired:1];
         [tapRecognizer setNumberOfTouchesRequired:1];
         [card addGestureRecognizer:tapRecognizer];
+        [card setTag:i];
     }
     [self start];
 }
+- (IBAction)RedealButtonPress:(UIButton *)sender {
+    [self removeMatchesFromBoard];
+    self.hand=nil;
+    self.hand=[[CGSetHand alloc] init];
+    self.hand = [self.hand dealHand:self.fullDeck];
+    [self updateUI];
 
-- (CGSetHand *) selectedCards
+}
+
+- (IBAction)NewGameButtonPress:(UIButton *)sender {
+    self.fullDeck=nil;
+    self.hand=nil;
+    self.selectedCards=nil;
+    self.matchedCards=nil;
+    [self start];
+}
+
+- (IBAction)ClearMatchesButtonPress:(UIButton *)sender {
+    [self removeMatchesFromBoard];
+    [self updateUI];
+}
+
+- (void) removeMatchesFromBoard{
+    for(int j=0;j<self.matchedCards.count;j++)
+    {
+        [self.hand.handOfCards replaceObjectAtIndex:((NSNumber *)[self.matchedCards objectAtIndex:j]).integerValue
+                                         withObject:[self removeCardFromBoard:[self.hand.handOfCards objectAtIndex:((NSNumber *)[self.matchedCards objectAtIndex:j]).integerValue]]];
+    }
+    self.matchedCards=nil;
+    self.selectedCards=nil;
+
+}
+
+- (CGSetCard *) removeCardFromBoard: (CGSetCard *) card
 {
-    if(!_selectedCards) _selectedCards=[[CGSetHand alloc] init];
+    card.cardChosen=NO;
+    card.cardViewButton.cardMatched=NO;
+    card.cardViewButton.backgroundColor=[UIColor whiteColor];
+    for (UIView *sv in card.cardViewButton.subviews)
+    {
+        [sv removeFromSuperview];
+    }
+    //Animate throwing cards away;
+    CGSetCard *newCard=[self.hand drawRandomCard:self.fullDeck];
+    newCard.cardViewButton=card.cardViewButton;
+    return newCard;
+}
+
+- (NSMutableArray *) selectedCards
+{
+    if(!_selectedCards) _selectedCards=[[NSMutableArray alloc] init];
     return _selectedCards;
+}
+
+- (CGSetHand *) buildArrayFromReferenceArray: (NSArray *) sourceArray
+{
+    CGSetHand *resultArray=[[CGSetHand alloc] init];
+    for(int i=0;i<sourceArray.count;i++)
+    {
+        NSInteger obj2add=((NSNumber *)[sourceArray objectAtIndex:i]).integerValue;
+        [resultArray.handOfCards addObject: [self.hand.handOfCards objectAtIndex:obj2add]];
+    }
+    return resultArray;
 }
 
 - (IBAction)tableCardTap:(UITapGestureRecognizer *)sender
 {
-    NSLog(@"Sender=%@",sender.description);
-    if(sender.view.backgroundColor!=[UIColor grayColor])
+    BOOL isCardChosen=[[self.hand.handOfCards objectAtIndex:sender.view.tag] cardChosen];
+    if(!isCardChosen)
+//    if(sender.view.backgroundColor!=[UIColor grayColor])
     {
-        if(self.selectedCards.handOfCards.count<3)
+        if(self.selectedCards.count<3)
         {
-            sender.view.backgroundColor=[UIColor grayColor];
-            [self.selectedCards.handOfCards addObject:[self findCardInHand:sender.view]];
-            if(self.selectedCards.handOfCards.count>2)
+            //sender.view.backgroundColor=[UIColor grayColor];
+            NSInteger refcard=[self findCardInHand:sender.view];
+            [self.selectedCards addObject:[NSNumber numberWithInteger:refcard]];
+            [[self.hand.handOfCards objectAtIndex:refcard] setCardChosen:YES];
+            [[[self.hand.handOfCards objectAtIndex:refcard] cardViewButton] setCardChosen:YES];
+            if(self.selectedCards.count>2)
             {
                 //check for a match
-                NSLog(@"checking for a match count=%ld",self.selectedCards.handOfCards.count);
-                BOOL result=[self.selectedCards match:self.selectedCards];
+                BOOL result=[self.hand match: [self buildArrayFromReferenceArray:self.selectedCards]];
                 if(!result) {
-                    for(CGSetCard * card in self.selectedCards.handOfCards)
-                        card.cardViewButton.backgroundColor=[UIColor whiteColor];
+                    for(CGSetCard * card in [self buildArrayFromReferenceArray:self.selectedCards].handOfCards){
+                        //card.cardViewButton.backgroundColor=[UIColor whiteColor];
+                        card.cardChosen=NO;
+                        card.cardViewButton.cardChosen=NO;
+                    }
                 } else {
-                    for(CGSetCard * card in self.selectedCards.handOfCards)
+                    self.matchedCards=[[NSMutableArray alloc] init];
+                    for(int i=0;i<self.selectedCards.count;i++)
                     {
+                        CGSetCard *card=[self.hand.handOfCards objectAtIndex:((NSNumber *)[self.selectedCards objectAtIndex:i]).integerValue];
+                        [self.matchedCards addObject:[NSNumber numberWithInteger:((NSNumber *)[self.selectedCards objectAtIndex:i]).integerValue]];
                         card.cardViewButton.cardMatched=YES;
-                        NSInteger randback=(arc4random() % 2)+1;
+                        NSInteger randback=(arc4random() % 3)+1;
                         switch (randback) {
                             case 1:
                                 card.cardViewButton.cardBackImage=@"splogo.png";
@@ -106,19 +175,20 @@
             }
         }
     }
+    [self updateUI];
 }
 
-- (CGSetCard *) findCardInHand: (UIView *) tableCard
+- (NSInteger) findCardInHand: (UIView *) tableCard
 {
-    CGSetCard *playingCard;
-    for (int i=0;i<self.hand.handOfCards.count;i++)
+    int i;
+    for (i=0;i<self.hand.handOfCards.count;i++)
         if([[self.hand.handOfCards objectAtIndex:i] cardViewButton]==tableCard)
         {
             ((CGSetCard *)self.hand.handOfCards[i]).cardChosen=YES;
             NSLog(@"in findCardInHand %d", [(CGSetCard*) self.hand.handOfCards[i] cardChosen]);
-            playingCard=[self.hand.handOfCards objectAtIndex:i];
+            break;
         }
-    return playingCard;
+    return i;
 }
 
 - (void)updateUI
@@ -126,6 +196,7 @@
     for(int i=0; i<self.hand.handOfCards.count;i++) {
         CGSetCard *currentCard=[self.hand.handOfCards objectAtIndex:i];
         currentCard.cardViewButton=[self.TableCards objectAtIndex:i];
+        NSLog(@"i=%d, tag=%ld",i,(long)[[self.TableCards objectAtIndex:i] tag]);
         if(currentCard.isMatched){
             // show card facedown
         }
@@ -139,6 +210,8 @@
             if(currentCard.cardChosen){
                 // set card background to gray
                 [currentCard cardViewButton].backgroundColor=[UIColor grayColor];
+            }else{
+                [currentCard cardViewButton].backgroundColor=[UIColor whiteColor];
             }
         }
         [currentCard.cardViewButton setNeedsDisplay];

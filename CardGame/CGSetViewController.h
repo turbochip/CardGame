@@ -16,5 +16,6 @@
 @property (nonatomic,strong) CGSetCard * setCard;
 @property (nonatomic,strong) CGSetHand * hand;
 @property (strong, nonatomic) IBOutletCollection(CGSetCardView) NSArray *TableCards;
-@property (nonatomic,strong) CGSetHand * selectedCards;
+@property (nonatomic,strong) NSMutableArray * selectedCards;
+@property (nonatomic,strong) NSMutableArray * matchedCards;
 @end

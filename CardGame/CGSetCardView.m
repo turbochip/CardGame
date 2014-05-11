@@ -92,15 +92,16 @@
                 shapeToDraw=[self drawSquiggle];
                 break;
         }
-        NSLog(@"self.stringToDraw class is %@",[self.stringToDraw.class description]);
+        if(self.cardChosen)
+            self.backgroundColor=[UIColor grayColor];
+        else
+            self.backgroundColor=[UIColor whiteColor];
         [(NSAttributedString*)self.stringToDraw drawAtPoint:CGPointMake(0, 0)];
     } else {
         UIImage *backImage=[UIImage imageNamed:self.cardBackImage];
-//        [backImage drawInRect:self.frame];
 
         UIImageView *backView=[[UIImageView alloc] initWithFrame: self.bounds];
         [backView setImage:backImage];
-//        backView.autoresizesSubviews=YES;
         [self addSubview:backView];
         
     }
@@ -115,7 +116,6 @@
         tempstr = [tempstr stringByAppendingString:shape];
     }
     self.stringToDraw=[[NSMutableAttributedString alloc] initWithString:tempstr];
-    NSLog(@"Color=%@",self.cardColor.description);
     [self.stringToDraw addAttribute:NSForegroundColorAttributeName value:(UIColor*) self.cardColor range:NSMakeRange(0,[self.stringToDraw length])];
     [self.stringToDraw addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Times New Roman" size:18] range:NSMakeRange(0, [self.stringToDraw length])];
     [self addFillToShape];
@@ -132,7 +132,6 @@
         tempstr = [tempstr stringByAppendingString:shape];
     }
     self.stringToDraw=[[NSMutableAttributedString alloc] initWithString:tempstr];
-    NSLog(@"Color=%@",self.cardColor.description);
     [self.stringToDraw addAttribute:NSForegroundColorAttributeName value:(UIColor*) self.cardColor range:NSMakeRange(0,[self.stringToDraw length])];
     [self.stringToDraw addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Times New Roman" size:18] range:NSMakeRange(0, [self.stringToDraw length])];
     [self addFillToShape];
@@ -149,7 +148,6 @@
         tempstr = [tempstr stringByAppendingString:shape];
     }
     self.stringToDraw=[[NSMutableAttributedString alloc] initWithString:tempstr];
-    NSLog(@"Color=%@",self.cardColor.description);
     [self.stringToDraw addAttribute:NSForegroundColorAttributeName value:(UIColor*) self.cardColor range:NSMakeRange(0,[self.stringToDraw length])];
     [self.stringToDraw addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Times New Roman" size:18] range:NSMakeRange(0, [self.stringToDraw length])];
     [self addFillToShape];
