@@ -83,17 +83,20 @@
                 } else {
                     for(CGSetCard * card in self.selectedCards.handOfCards)
                     {
-                        NSInteger randback=arc4random() % 3;
+                        card.cardViewButton.cardMatched=YES;
+                        NSInteger randback=(arc4random() % 2)+1;
                         switch (randback) {
                             case 1:
-                            {
-                                UIImage *img= [UIImage imageNamed:@"MerckLogo.png"];
-                                [card.cardViewButton setBackgroundImage:img forState:UIControlStateNormal];
+                                card.cardViewButton.cardBackImage=@"splogo.png";
+                                [card.cardViewButton setNeedsDisplay];
                                 break;
-                            }
                             case 2:
+                                card.cardViewButton.cardBackImage=@"MerckLogo.png";
+                                [card.cardViewButton setNeedsDisplay];
                                 break;
                             case 3:
+                                card.cardViewButton.cardBackImage=@"bayer-logo.png";
+                                [card.cardViewButton setNeedsDisplay];
                                 break;
                         }
 

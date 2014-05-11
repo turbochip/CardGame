@@ -95,6 +95,14 @@
         NSLog(@"self.stringToDraw class is %@",[self.stringToDraw.class description]);
         [(NSAttributedString*)self.stringToDraw drawAtPoint:CGPointMake(0, 0)];
     } else {
+        UIImage *backImage=[UIImage imageNamed:self.cardBackImage];
+//        [backImage drawInRect:self.frame];
+
+        UIImageView *backView=[[UIImageView alloc] initWithFrame: self.bounds];
+        [backView setImage:backImage];
+//        backView.autoresizesSubviews=YES;
+        [self addSubview:backView];
+        
     }
 }
 

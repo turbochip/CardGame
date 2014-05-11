@@ -906,11 +906,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CardGame/CGSetViewController.m"
-            timestampString = "421467271.621205"
+            timestampString = "421514138.350867"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "126"
-            endingLineNumber = "126"
+            startingLineNumber = "129"
+            endingLineNumber = "129"
             landmarkName = "-updateUI"
             landmarkType = "5">
          </BreakpointContent>
@@ -922,44 +922,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CardGame/CGSetViewController.m"
-            timestampString = "421467271.621205"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "105"
-            endingLineNumber = "105"
-            landmarkName = "-updateUI"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CardGame/CGSetViewController.m"
-            timestampString = "421467271.621205"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "120"
-            endingLineNumber = "120"
-            landmarkName = "-updateUI"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CardGame/CGSetViewController.m"
-            timestampString = "421467271.621205"
+            timestampString = "421514138.350867"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "108"
             endingLineNumber = "108"
-            landmarkName = "-updateUI"
+            landmarkName = "-tableCardTap:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -970,13 +938,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CardGame/CGSetViewController.m"
-            timestampString = "421467271.621205"
+            timestampString = "421514138.350867"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "104"
-            endingLineNumber = "104"
-            landmarkName = "-updateUI"
-            landmarkType = "5">
+            startingLineNumber = "123"
+            endingLineNumber = "123"
+            landmarkName = "@implementation CGSetViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -986,43 +954,75 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CardGame/CGSetViewController.m"
-            timestampString = "421467271.621205"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "113"
-            endingLineNumber = "113"
-            landmarkName = "-updateUI"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CardGame/CGSetCardView.m"
-            timestampString = "421292031.174191"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "104"
-            endingLineNumber = "104"
-            landmarkName = "-drawCircle"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CardGame/CGSetCardView.m"
-            timestampString = "421468198.142806"
+            timestampString = "421514138.350867"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "111"
             endingLineNumber = "111"
+            landmarkName = "-findCardInHand:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CardGame/CGSetViewController.m"
+            timestampString = "421514138.350867"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "107"
+            endingLineNumber = "107"
+            landmarkName = "-tableCardTap:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CardGame/CGSetViewController.m"
+            timestampString = "421514138.350867"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "116"
+            endingLineNumber = "116"
+            landmarkName = "-findCardInHand:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CardGame/CGSetCardView.m"
+            timestampString = "421513970.465585"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "112"
+            endingLineNumber = "112"
+            landmarkName = "-drawCircle"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CardGame/CGSetCardView.m"
+            timestampString = "421513970.465585"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "119"
+            endingLineNumber = "119"
             landmarkName = "-drawCircle"
             landmarkType = "5">
          </BreakpointContent>
@@ -1034,12 +1034,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CardGame/CGSetViewController.m"
-            timestampString = "421467271.621205"
+            timestampString = "421514138.350867"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "106"
-            endingLineNumber = "106"
-            landmarkName = "-updateUI"
+            startingLineNumber = "109"
+            endingLineNumber = "109"
+            landmarkName = "-tableCardTap:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1050,12 +1050,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CardGame/CGSetViewController.m"
-            timestampString = "421467271.621205"
+            timestampString = "421514138.350867"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "114"
-            endingLineNumber = "114"
-            landmarkName = "-updateUI"
+            startingLineNumber = "117"
+            endingLineNumber = "117"
+            landmarkName = "-findCardInHand:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1066,11 +1066,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CardGame/CGSetCardView.m"
-            timestampString = "421292031.174191"
+            timestampString = "421513970.465585"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "105"
-            endingLineNumber = "105"
+            startingLineNumber = "113"
+            endingLineNumber = "113"
             landmarkName = "-drawCircle"
             landmarkType = "5">
          </BreakpointContent>
@@ -1174,11 +1174,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CardGame/CGSetCardView.m"
-            timestampString = "421468198.142806"
+            timestampString = "421513970.465585"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "108"
-            endingLineNumber = "108"
+            startingLineNumber = "116"
+            endingLineNumber = "116"
             landmarkName = "-drawCircle"
             landmarkType = "5">
          </BreakpointContent>
@@ -1190,11 +1190,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CardGame/CGSetCardView.m"
-            timestampString = "421292031.174191"
+            timestampString = "421513970.465585"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "107"
-            endingLineNumber = "107"
+            startingLineNumber = "115"
+            endingLineNumber = "115"
             landmarkName = "-drawCircle"
             landmarkType = "5">
          </BreakpointContent>
@@ -1206,11 +1206,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CardGame/CGSetCardView.m"
-            timestampString = "421468198.142806"
+            timestampString = "421513970.465585"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "157"
-            endingLineNumber = "157"
+            startingLineNumber = "165"
+            endingLineNumber = "165"
             landmarkName = "-addFillToShape"
             landmarkType = "5">
          </BreakpointContent>
@@ -1270,12 +1270,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CardGame/CGSetViewController.m"
-            timestampString = "421467271.621205"
+            timestampString = "421514138.350867"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "99"
+            endingLineNumber = "99"
+            landmarkName = "-tableCardTap:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CardGame/CGSetViewController.m"
+            timestampString = "421514138.350867"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "97"
             endingLineNumber = "97"
-            landmarkName = "-findCardInHand:"
+            landmarkName = "-tableCardTap:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1286,43 +1302,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CardGame/CGSetViewController.m"
-            timestampString = "421467271.621205"
+            timestampString = "421506421.271784"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "93"
-            endingLineNumber = "93"
-            landmarkName = "-findCardInHand:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CardGame/CGSetViewController.m"
-            timestampString = "421467271.621205"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "96"
-            endingLineNumber = "96"
-            landmarkName = "-findCardInHand:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CardGame/CGSetViewController.m"
-            timestampString = "421467271.621205"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "88"
-            endingLineNumber = "88"
+            startingLineNumber = "89"
+            endingLineNumber = "89"
             landmarkName = "-tableCardTap:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1350,11 +1334,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CardGame/CGSetCardView.m"
-            timestampString = "421468198.142806"
+            timestampString = "421513970.465585"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "136"
-            endingLineNumber = "136"
+            startingLineNumber = "144"
+            endingLineNumber = "144"
             landmarkName = "-drawSquiggle"
             landmarkType = "5">
          </BreakpointContent>
@@ -1366,11 +1350,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CardGame/CGSetCardView.m"
-            timestampString = "421468198.142806"
+            timestampString = "421513970.465585"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "119"
-            endingLineNumber = "119"
+            startingLineNumber = "127"
+            endingLineNumber = "127"
             landmarkName = "-drawDiamond"
             landmarkType = "5">
          </BreakpointContent>
@@ -1382,11 +1366,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CardGame/CGSetCardView.m"
-            timestampString = "421465933.507289"
+            timestampString = "421513970.465585"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "102"
-            endingLineNumber = "102"
+            startingLineNumber = "110"
+            endingLineNumber = "110"
             landmarkName = "-drawCircle"
             landmarkType = "5">
          </BreakpointContent>
@@ -1554,7 +1538,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CardGame/CGSetHand.m"
@@ -1564,6 +1548,22 @@
             startingLineNumber = "74"
             endingLineNumber = "74"
             landmarkName = "-match:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CardGame/CGSetViewController.m"
+            timestampString = "421514192.355904"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
+            landmarkName = "-tableCardTap:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

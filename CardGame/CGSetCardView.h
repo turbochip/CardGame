@@ -10,6 +10,7 @@
 
 @interface CGSetCardView : UIView
 @property (nonatomic,strong) NSMutableAttributedString* cardContent;
+@property (nonatomic,strong) NSString *cardBackImage;
 @property (nonatomic,strong) UIColor * cardColor;
 @property (nonatomic,strong) NSNumber * cardShape;
 @property (nonatomic,strong) NSNumber * cardFill;
