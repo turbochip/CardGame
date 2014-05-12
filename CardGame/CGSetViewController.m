@@ -62,17 +62,45 @@
     [self removeMatchesFromBoard];
     self.hand=nil;
     self.hand=[[CGSetHand alloc] init];
-    self.hand = [self.hand dealHand:self.fullDeck];
-    [self updateUI];
-
+    if(self.fullDeck.deckSize>=15)
+    {
+        self.hand = [self.hand dealHand:self.fullDeck];
+        [self updateUI];
+    } else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" message:@"You have exhausted your deck" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Restart", nil];
+        [alert show];
+    }
 }
 
-- (IBAction)NewGameButtonPress:(UIButton *)sender {
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSLog(@"title=%@", [alertView buttonTitleAtIndex:buttonIndex]);
+
+    if([[alertView buttonTitleAtIndex:buttonIndex] isEqualToString:@"Cancel"]) {
+        /* How do we exit the application */
+    } else {
+        [self resetGame];
+    }
+}
+
+- (void) resetGame
+{
     self.fullDeck=nil;
+    for(CGSetCard * card in self.hand.handOfCards){
+        card.cardViewButton.cardChosen=NO;
+        card.cardViewButton.cardMatched=NO;
+        for(UIImageView *sv in card.cardViewButton.subviews)
+            sv.removeFromSuperview;
+    }
     self.hand=nil;
     self.selectedCards=nil;
     self.matchedCards=nil;
     [self start];
+   
+}
+
+- (IBAction)NewGameButtonPress:(UIButton *)sender {
+    [self resetGame];
 }
 
 - (IBAction)ClearMatchesButtonPress:(UIButton *)sender {

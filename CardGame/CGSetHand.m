@@ -16,8 +16,10 @@
 
 - (CGSetHand *) dealHand: (CGSetDeck *) cardDeck
 {
-    for(int i=0;i<HANDSIZE;i++)
+    for(int i=0;i<HANDSIZE;i++){
+        // add card dealing animation
         [self.handOfCards addObject:[self drawRandomCard:cardDeck]];
+    }
     return self;
 }
 
