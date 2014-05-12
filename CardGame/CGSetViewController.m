@@ -11,10 +11,13 @@
 #import "CGSetDeck.h"
 #import "CGSetHand.h"
 #import "CGSetCardView.h"
+#import "CGMainSetDeckView.h"
 
 @interface CGSetViewController ()
 @property (strong, nonatomic) IBOutletCollection(CGSetCardView) NSArray *tableCardTap;
 @property (nonatomic,strong) CGSetCardView *cardView;
+@property (nonatomic) NSInteger setScore;
+@property (nonatomic,strong) CGMainSetDeckView* deckView;
 
 - (CGSetHand *) buildArrayFromReferenceArray: (NSArray *) sourceArray;
 - (NSInteger) findCardInHand: (UIView *) tableCard;
@@ -32,6 +35,19 @@
     return self;
 }
 
+- (NSMutableArray *) matchedCards
+{
+    if(!_matchedCards)
+        _matchedCards=[[NSMutableArray alloc] init];
+    return _matchedCards;
+}
+
+- (NSMutableArray *) selectedCards
+{
+    if(!_selectedCards)
+        _selectedCards=[[NSMutableArray alloc] init];
+    return _selectedCards;
+}
 
 - (void)start
 {
@@ -41,6 +57,7 @@
     self.cardView = [[CGSetCardView alloc] init];
     self.fullDeck = [self.fullDeck createSetDeckof:self.setCard];
     self.hand = [self.hand dealHand:self.fullDeck];
+    [self.MainDeckView setNeedsDisplay];
     [self updateUI];
 }
 
@@ -65,6 +82,7 @@
     if(self.fullDeck.deckSize>=15)
     {
         self.hand = [self.hand dealHand:self.fullDeck];
+        [self.MainDeckView setNeedsDisplay];
         [self updateUI];
     } else {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" message:@"You have exhausted your deck" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Restart", nil];
@@ -95,6 +113,7 @@
     self.hand=nil;
     self.selectedCards=nil;
     self.matchedCards=nil;
+    self.setScore=0;
     [self start];
    
 }
@@ -116,7 +135,6 @@
     }
     self.matchedCards=nil;
     self.selectedCards=nil;
-
 }
 
 - (CGSetCard *) removeCardFromBoard: (CGSetCard *) card
@@ -129,15 +147,10 @@
         [sv removeFromSuperview];
     }
     //Animate throwing cards away;
+    [self.MainDeckView setNeedsDisplay];
     CGSetCard *newCard=[self.hand drawRandomCard:self.fullDeck];
     newCard.cardViewButton=card.cardViewButton;
     return newCard;
-}
-
-- (NSMutableArray *) selectedCards
-{
-    if(!_selectedCards) _selectedCards=[[NSMutableArray alloc] init];
-    return _selectedCards;
 }
 
 - (CGSetHand *) buildArrayFromReferenceArray: (NSArray *) sourceArray
@@ -155,7 +168,6 @@
 {
     BOOL isCardChosen=[[self.hand.handOfCards objectAtIndex:sender.view.tag] cardChosen];
     if(!isCardChosen)
-//    if(sender.view.backgroundColor!=[UIColor grayColor])
     {
         if(self.selectedCards.count<3)
         {
@@ -175,7 +187,8 @@
                         card.cardViewButton.cardChosen=NO;
                     }
                 } else {
-                    self.matchedCards=[[NSMutableArray alloc] init];
+                    //self.matchedCards=[[NSMutableArray alloc] init];
+                    self.setScore++;
                     for(int i=0;i<self.selectedCards.count;i++)
                     {
                         CGSetCard *card=[self.hand.handOfCards objectAtIndex:((NSNumber *)[self.selectedCards objectAtIndex:i]).integerValue];
@@ -242,6 +255,11 @@
                 [currentCard cardViewButton].backgroundColor=[UIColor whiteColor];
             }
         }
+        NSString *tempStr=[[NSString alloc] initWithFormat:@"%ld Cards in deck",self.fullDeck.deckSize];
+        [self.cardsInDeckLabel setText:tempStr];
+        tempStr=nil;
+        tempStr=[[NSString alloc] initWithFormat:@"%ld Sets found",self.setScore];
+        [self.setsFoundLabel setText:tempStr];
         [currentCard.cardViewButton setNeedsDisplay];
     }
     

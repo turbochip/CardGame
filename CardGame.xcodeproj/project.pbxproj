@@ -34,6 +34,7 @@
 		F1698F1419133BDC00DEE18B /* CGMatchingHand.m in Sources */ = {isa = PBXBuildFile; fileRef = F1698F1319133BDC00DEE18B /* CGMatchingHand.m */; };
 		F1698F1719133BEB00DEE18B /* CGSetHand.m in Sources */ = {isa = PBXBuildFile; fileRef = F1698F1619133BEB00DEE18B /* CGSetHand.m */; };
 		F1698F1D1913402400DEE18B /* CGSetPlay.m in Sources */ = {isa = PBXBuildFile; fileRef = F1698F1C1913402400DEE18B /* CGSetPlay.m */; };
+		F173F23919205CDC0057A524 /* CGMainSetDeckView.m in Sources */ = {isa = PBXBuildFile; fileRef = F173F23819205CDC0057A524 /* CGMainSetDeckView.m */; };
 		F176905C1916B28900E9CB8F /* playingcardback.png in Resources */ = {isa = PBXBuildFile; fileRef = F176905B1916B28900E9CB8F /* playingcardback.png */; };
 		F18E83291917F3A30012E796 /* CGSetCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = F18E83281917F3A30012E796 /* CGSetCardView.m */; };
 		F1C11BEF1916EC2300182501 /* CGCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C11BEE1916EC2300182501 /* CGCardView.m */; };
@@ -95,6 +96,8 @@
 		F1698F1619133BEB00DEE18B /* CGSetHand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGSetHand.m; sourceTree = "<group>"; };
 		F1698F1B1913402400DEE18B /* CGSetPlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGSetPlay.h; sourceTree = "<group>"; };
 		F1698F1C1913402400DEE18B /* CGSetPlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGSetPlay.m; sourceTree = "<group>"; };
+		F173F23719205CDC0057A524 /* CGMainSetDeckView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGMainSetDeckView.h; sourceTree = "<group>"; };
+		F173F23819205CDC0057A524 /* CGMainSetDeckView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGMainSetDeckView.m; sourceTree = "<group>"; };
 		F176905B1916B28900E9CB8F /* playingcardback.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playingcardback.png; sourceTree = "<group>"; };
 		F18E83271917F3A30012E796 /* CGSetCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGSetCardView.h; sourceTree = "<group>"; };
 		F18E83281917F3A30012E796 /* CGSetCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGSetCardView.m; sourceTree = "<group>"; };
@@ -250,6 +253,8 @@
 				F1C11BEE1916EC2300182501 /* CGCardView.m */,
 				F18E83271917F3A30012E796 /* CGSetCardView.h */,
 				F18E83281917F3A30012E796 /* CGSetCardView.m */,
+				F173F23719205CDC0057A524 /* CGMainSetDeckView.h */,
+				F173F23819205CDC0057A524 /* CGMainSetDeckView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -353,6 +358,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F173F23919205CDC0057A524 /* CGMainSetDeckView.m in Sources */,
 				F1698F051913396000DEE18B /* CGHand.m in Sources */,
 				F1698F1719133BEB00DEE18B /* CGSetHand.m in Sources */,
 				F1698F1D1913402400DEE18B /* CGSetPlay.m in Sources */,

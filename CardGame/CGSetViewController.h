@@ -18,4 +18,7 @@
 @property (strong, nonatomic) IBOutletCollection(CGSetCardView) NSArray *TableCards;
 @property (nonatomic,strong) NSMutableArray * selectedCards;
 @property (nonatomic,strong) NSMutableArray * matchedCards;
+@property (strong, nonatomic) IBOutlet UILabel *setsFoundLabel;
+@property (strong, nonatomic) IBOutlet UILabel *cardsInDeckLabel;
+@property (strong, nonatomic) IBOutlet CGSetCardView *MainDeckView;
 @end
