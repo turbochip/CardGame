@@ -19,12 +19,13 @@
 - (CGSetDeck *)createSetDeckof: (CGSetCard *) card
 {
     self.deckOfCards = [[NSMutableArray alloc] init];
-    for(NSNumber *shape in card.ShapeDict.allKeys)
-        for (NSNumber *fill in card.FillDict.allKeys)
-            for(int i=0;i<3;i++)
+    for(NSInteger shape=0;shape<3;shape++)
+        for(NSInteger fill=0; fill < 3; fill++)
+            for(NSInteger i=0;i<3;i++)
                 for(UIColor *color in card.ColorDict.allKeys)
                 {
                     [self.deckOfCards addObject:[card createCardWithColor:color Shape:shape Fill:fill Quantity:i]];
+                    NSLog(@"Adding Card %@",((CGSetCard *)[self.deckOfCards lastObject]).contents );
                 }
     NSLog(@"Done Adding Full Deck");
     return self;

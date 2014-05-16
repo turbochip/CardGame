@@ -10,9 +10,9 @@
 #import "CGSetCardView.h"
 
 @interface CGSetCard : CGCard
-@property (nonatomic) NSNumber *cardShape;
+@property (nonatomic) NSInteger cardShape;
 @property (nonatomic) UIColor *cardColor;
-@property (nonatomic) NSNumber *cardFill;
+@property (nonatomic) NSInteger cardFill;
 @property (nonatomic) NSInteger cardQuantity;
 @property (nonatomic,strong) NSString *contents;
 @property (nonatomic) BOOL isMatched;
@@ -22,7 +22,7 @@
 @property (nonatomic,strong) NSDictionary *ColorDict;
 @property (nonatomic,strong) NSDictionary *ShapeDict;
 
-- (CGCard *) createCardWithColor: (UIColor *) color Shape: (NSNumber *) shape Fill: (NSNumber*) fill Quantity: (NSInteger) quantity;
+- (CGCard *) createCardWithColor: (UIColor *) color Shape: (NSInteger) shape Fill: (NSInteger) fill Quantity: (NSInteger) quantity;
 
 
 @end

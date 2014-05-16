@@ -12,6 +12,7 @@
 @interface CGSetHand : CGHand
 - (CGSetHand *) dealHand: (CGSetDeck *) cardDeck;
 - (CGSetCard *) drawRandomCard: (CGSetDeck *) cardDeck;
+
 - (BOOL) match: (CGSetHand *) selectedCards;
 
 @end

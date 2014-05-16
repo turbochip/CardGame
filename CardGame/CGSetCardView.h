@@ -12,8 +12,8 @@
 @property (nonatomic,strong) NSMutableAttributedString* cardContent;
 @property (nonatomic,strong) NSString *cardBackImage;
 @property (nonatomic,strong) UIColor * cardColor;
-@property (nonatomic,strong) NSNumber * cardShape;
-@property (nonatomic,strong) NSNumber * cardFill;
+@property (nonatomic) NSInteger cardShape;
+@property (nonatomic) NSInteger cardFill;
 @property (nonatomic) NSInteger cardQuantity;
 @property (nonatomic) BOOL cardChosen;
 @property (nonatomic) BOOL cardMatched;

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F10D359E19244F39004CBD13 /* CGSetView.m in Sources */ = {isa = PBXBuildFile; fileRef = F10D359D19244F39004CBD13 /* CGSetView.m */; };
 		F14D4F931914627200E1061A /* CGMatchingView.m in Sources */ = {isa = PBXBuildFile; fileRef = F14D4F921914627200E1061A /* CGMatchingView.m */; };
 		F1698EC01913343300DEE18B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1698EBF1913343300DEE18B /* Foundation.framework */; };
 		F1698EC21913343300DEE18B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1698EC11913343300DEE18B /* CoreGraphics.framework */; };
@@ -51,6 +52,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F10D359C19244F39004CBD13 /* CGSetView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGSetView.h; sourceTree = "<group>"; };
+		F10D359D19244F39004CBD13 /* CGSetView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGSetView.m; sourceTree = "<group>"; };
 		F14D4F911914627200E1061A /* CGMatchingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGMatchingView.h; sourceTree = "<group>"; };
 		F14D4F921914627200E1061A /* CGMatchingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGMatchingView.m; sourceTree = "<group>"; };
 		F1698EBC1913343300DEE18B /* CardGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CardGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -255,6 +258,8 @@
 				F18E83281917F3A30012E796 /* CGSetCardView.m */,
 				F173F23719205CDC0057A524 /* CGMainSetDeckView.h */,
 				F173F23819205CDC0057A524 /* CGMainSetDeckView.m */,
+				F10D359C19244F39004CBD13 /* CGSetView.h */,
+				F10D359D19244F39004CBD13 /* CGSetView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -377,6 +382,7 @@
 				F18E83291917F3A30012E796 /* CGSetCardView.m in Sources */,
 				F1698F0819133B7D00DEE18B /* CGMatchingCard.m in Sources */,
 				F1698F1119133BC200DEE18B /* CGSetDeck.m in Sources */,
+				F10D359E19244F39004CBD13 /* CGSetView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

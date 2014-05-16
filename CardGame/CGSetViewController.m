@@ -12,10 +12,9 @@
 #import "CGSetHand.h"
 #import "CGSetCardView.h"
 #import "CGMainSetDeckView.h"
+#import "CGSetView.h"
 
 @interface CGSetViewController ()
-@property (strong, nonatomic) IBOutletCollection(CGSetCardView) NSArray *tableCardTap;
-@property (nonatomic,strong) CGSetCardView *cardView;
 @property (nonatomic) NSInteger setScore;
 @property (nonatomic,strong) CGMainSetDeckView* deckView;
 
@@ -54,10 +53,12 @@
     self.setCard = [[CGSetCard alloc] init];
     self.fullDeck = [[CGSetDeck alloc] init];
     self.hand = [[CGSetHand alloc] init];
-    self.cardView = [[CGSetCardView alloc] init];
+//    self.Table = [[CGSetView alloc] init];
+    
+    
     self.fullDeck = [self.fullDeck createSetDeckof:self.setCard];
     self.hand = [self.hand dealHand:self.fullDeck];
-    [self.MainDeckView setNeedsDisplay];
+    
     [self updateUI];
 }
 
@@ -65,15 +66,30 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self start];
+    self.Table=[[CGSetView alloc] initWithFrame:CGRectMake(15, 20,290, 260)];
+    self.Table.backgroundColor=[UIColor darkGrayColor];
+    [self.view addSubview:self.Table];
+
+    for(int i=0;i<12;i++) {
+        CGSetCard *lCard=((CGSetCard *) self.hand.handOfCards[i]);
+        lCard.cardViewButton  = [self.Table addCard];
+        lCard.cardViewButton.cardColor=lCard.cardColor;
+        lCard.cardViewButton.cardShape=lCard.cardShape;
+        lCard.cardViewButton.cardFill=lCard.cardFill;
+        lCard.cardViewButton.cardQuantity=lCard.cardQuantity;
+    }
+    self.TableCards=self.Table.subviews;
     for(int i=0;i<self.TableCards.count;i++) {
         UIView *card = self.TableCards[i];
         UITapGestureRecognizer * tapRecognizer  = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tableCardTap:)];
         [tapRecognizer setNumberOfTapsRequired:1];
         [tapRecognizer setNumberOfTouchesRequired:1];
         [card addGestureRecognizer:tapRecognizer];
+
         [card setTag:i];
     }
-    [self start];
 }
 - (IBAction)RedealButtonPress:(UIButton *)sender {
     [self removeMatchesFromBoard];
@@ -222,7 +238,7 @@
 - (NSInteger) findCardInHand: (UIView *) tableCard
 {
     int i;
-    for (i=0;i<self.hand.handOfCards.count;i++)
+    for (i=0;i<self.TableCards.count;i++)
         if([[self.hand.handOfCards objectAtIndex:i] cardViewButton]==tableCard)
         {
             ((CGSetCard *)self.hand.handOfCards[i]).cardChosen=YES;
@@ -234,7 +250,7 @@
 
 - (void)updateUI
 {
-    for(int i=0; i<self.hand.handOfCards.count;i++) {
+    for(int i=0; i<self.TableCards.count;i++) {
         CGSetCard *currentCard=[self.hand.handOfCards objectAtIndex:i];
         currentCard.cardViewButton=[self.TableCards objectAtIndex:i];
         NSLog(@"i=%d, tag=%ld",i,(long)[[self.TableCards objectAtIndex:i] tag]);

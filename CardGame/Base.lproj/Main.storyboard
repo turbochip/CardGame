@@ -16,99 +16,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SmC-fG-5vt" customClass="CGSetCardView">
-                                <rect key="frame" x="20" y="44" width="50" height="75"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                <gestureRecognizers/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="57" id="65j-Qa-KnW"/>
-                                </constraints>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HLz-Gi-9fa" customClass="CGSetCardView">
-                                <rect key="frame" x="78" y="44" width="50" height="75"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                <gestureRecognizers/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5FJ-Ix-xnk" customClass="CGSetCardView">
-                                <rect key="frame" x="136" y="44" width="50" height="75"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                <gestureRecognizers/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QqB-Ea-ftM" customClass="CGSetCardView">
-                                <rect key="frame" x="194" y="44" width="50" height="75"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                <gestureRecognizers/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0Wm-wI-S5y" customClass="CGSetCardView">
-                                <rect key="frame" x="250" y="44" width="50" height="75"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                <gestureRecognizers/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sGl-W3-Z8Q" customClass="CGSetCardView">
-                                <rect key="frame" x="20" y="134" width="50" height="75"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                <gestureRecognizers/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ua7-ft-eTy" customClass="CGSetCardView">
-                                <rect key="frame" x="78" y="134" width="50" height="75"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                <gestureRecognizers/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Nw4-no-RQA" customClass="CGSetCardView">
-                                <rect key="frame" x="136" y="134" width="50" height="75"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                <gestureRecognizers/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="I72-gj-PJu" customClass="CGSetCardView">
-                                <rect key="frame" x="194" y="134" width="50" height="75"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                <gestureRecognizers/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C8R-pu-DzI" customClass="CGSetCardView">
-                                <rect key="frame" x="250" y="134" width="50" height="75"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                <gestureRecognizers/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="86b-Bg-cq1" customClass="CGSetCardView">
-                                <rect key="frame" x="20" y="224" width="50" height="75"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                <gestureRecognizers/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="klg-rc-XpY" customClass="CGSetCardView">
-                                <rect key="frame" x="78" y="224" width="50" height="75"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                <gestureRecognizers/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mCX-hD-ljX" customClass="CGSetCardView">
-                                <rect key="frame" x="136" y="224" width="50" height="75"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                <gestureRecognizers/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CvS-UB-SGR" customClass="CGSetCardView">
-                                <rect key="frame" x="194" y="224" width="50" height="75"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                <gestureRecognizers/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fBg-kf-fJD" customClass="CGSetCardView">
-                                <rect key="frame" x="250" y="224" width="50" height="75"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                <gestureRecognizers/>
-                            </view>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="HTs-Zy-1jq">
                                 <rect key="frame" x="20" y="480" width="66" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -166,36 +73,6 @@
                         <outlet property="MainDeckView" destination="F7Z-V1-E8V" id="HbE-3U-TXr"/>
                         <outlet property="cardsInDeckLabel" destination="bre-nM-coi" id="KYi-mS-7iy"/>
                         <outlet property="setsFoundLabel" destination="qiH-B1-qsH" id="kcL-ad-Yc1"/>
-                        <outletCollection property="TableCards" destination="SmC-fG-5vt" id="I7e-EL-I9z"/>
-                        <outletCollection property="TableCards" destination="HLz-Gi-9fa" id="mt1-PI-SkW"/>
-                        <outletCollection property="TableCards" destination="5FJ-Ix-xnk" id="osM-uW-Doo"/>
-                        <outletCollection property="TableCards" destination="QqB-Ea-ftM" id="pCc-Hb-JbD"/>
-                        <outletCollection property="TableCards" destination="0Wm-wI-S5y" id="xlZ-9q-t7x"/>
-                        <outletCollection property="TableCards" destination="sGl-W3-Z8Q" id="kW1-AK-Jjb"/>
-                        <outletCollection property="TableCards" destination="ua7-ft-eTy" id="bYa-LT-8N0"/>
-                        <outletCollection property="TableCards" destination="Nw4-no-RQA" id="9Ea-zc-NZQ"/>
-                        <outletCollection property="TableCards" destination="I72-gj-PJu" id="lzE-97-Otz"/>
-                        <outletCollection property="TableCards" destination="C8R-pu-DzI" id="HEd-FF-ZDb"/>
-                        <outletCollection property="TableCards" destination="86b-Bg-cq1" id="uGU-Pn-ndD"/>
-                        <outletCollection property="TableCards" destination="klg-rc-XpY" id="Cif-bg-FlC"/>
-                        <outletCollection property="TableCards" destination="mCX-hD-ljX" id="gAg-2j-g8Y"/>
-                        <outletCollection property="TableCards" destination="CvS-UB-SGR" id="SX8-fm-mqX"/>
-                        <outletCollection property="TableCards" destination="fBg-kf-fJD" id="9Jm-H4-9lb"/>
-                        <outletCollection property="tableCardTap" destination="SmC-fG-5vt" id="U47-79-XWe"/>
-                        <outletCollection property="tableCardTap" destination="HLz-Gi-9fa" id="DVB-un-ke7"/>
-                        <outletCollection property="tableCardTap" destination="5FJ-Ix-xnk" id="5Fa-aK-D7V"/>
-                        <outletCollection property="tableCardTap" destination="QqB-Ea-ftM" id="dI1-u7-Iv6"/>
-                        <outletCollection property="tableCardTap" destination="0Wm-wI-S5y" id="Ud4-sq-A1E"/>
-                        <outletCollection property="tableCardTap" destination="sGl-W3-Z8Q" id="301-6t-Rfp"/>
-                        <outletCollection property="tableCardTap" destination="ua7-ft-eTy" id="OTw-Sq-s1X"/>
-                        <outletCollection property="tableCardTap" destination="Nw4-no-RQA" id="ggD-R3-CsK"/>
-                        <outletCollection property="tableCardTap" destination="I72-gj-PJu" id="g4c-Ib-Egb"/>
-                        <outletCollection property="tableCardTap" destination="C8R-pu-DzI" id="LQC-aq-kCm"/>
-                        <outletCollection property="tableCardTap" destination="86b-Bg-cq1" id="C6W-s4-wpD"/>
-                        <outletCollection property="tableCardTap" destination="klg-rc-XpY" id="FJi-wa-E21"/>
-                        <outletCollection property="tableCardTap" destination="mCX-hD-ljX" id="bwF-TF-Jjt"/>
-                        <outletCollection property="tableCardTap" destination="CvS-UB-SGR" id="IK8-EA-P16"/>
-                        <outletCollection property="tableCardTap" destination="fBg-kf-fJD" id="mlt-XD-JWs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zqi-5p-X2I" userLabel="First Responder" sceneMemberID="firstResponder"/>

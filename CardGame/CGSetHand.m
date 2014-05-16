@@ -45,7 +45,7 @@
     
     for(CGSetCard *testCard in testCards.handOfCards)
     {
-        NSLog(@"selected Card = %@ %d %d %ld",testCard.cardColor.description,testCard.cardShape.intValue,testCard.cardFill.intValue,testCard.cardQuantity);
+        NSLog(@"selected Card = %@",testCard.contents);
     }
     BOOL Matched=NO;
     NSMutableArray * selectedCards=testCards.handOfCards;
@@ -66,12 +66,12 @@
     if(([selectedCards[0] cardFill]!=[selectedCards[1] cardFill]) &&
        ([selectedCards[0] cardFill]!=[selectedCards[2] cardFill]) &&
        ([selectedCards[1] cardFill]!=[selectedCards[2] cardFill])) fillMatch=YES;
-    if((![[selectedCards[0] cardShape] isEqual: [selectedCards[1] cardShape]]) &&
-       (![[selectedCards[0] cardShape] isEqual: [selectedCards[2] cardShape]]) &&
-       (![[selectedCards[1] cardShape] isEqual: [selectedCards[2] cardShape]])) shapeMatch=YES;
-    if((![[selectedCards[0] cardColor] isEqual: [selectedCards[1] cardColor]]) &&
-       (![[selectedCards[0] cardColor] isEqual: [selectedCards[2] cardColor]]) &&
-       (![[selectedCards[1] cardColor] isEqual: [selectedCards[2] cardColor]])) colorMatch=YES;
+    if(([selectedCards[0] cardShape] != [selectedCards[1] cardShape]) &&
+       ([selectedCards[0] cardShape] != [selectedCards[2] cardShape]) &&
+       ([selectedCards[1] cardShape] != [selectedCards[2] cardShape])) shapeMatch=YES;
+    if(!(([[selectedCards[0] cardColor] isEqual: [selectedCards[1] cardColor]]) &&
+       ([[selectedCards[0] cardColor] isEqual: [selectedCards[2] cardColor]]) &&
+       ([[selectedCards[1] cardColor] isEqual: [selectedCards[2] cardColor]]))) colorMatch=YES;
     
     if(qtyMatch && fillMatch && shapeMatch && colorMatch) Matched=YES;
     
