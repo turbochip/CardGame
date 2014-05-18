@@ -18,7 +18,6 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
-        NSLog(@"in initwithframe");
     }
     return self;
 }
@@ -284,5 +283,10 @@ void MyDrawColoredPattern (void *info, CGContextRef context)
                                            &callbacks);
     return pattern;
     
+}
+
+- (void) removeSubview: (CGSetCardView *) sv
+{
+    [sv removeFromSuperview];
 }
 @end

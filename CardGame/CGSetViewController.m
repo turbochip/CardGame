@@ -53,11 +53,9 @@
     self.setCard = [[CGSetCard alloc] init];
     self.fullDeck = [[CGSetDeck alloc] init];
     self.hand = [[CGSetHand alloc] init];
-//    self.Table = [[CGSetView alloc] init];
-    
     
     self.fullDeck = [self.fullDeck createSetDeckof:self.setCard];
-    self.hand = [self.hand dealHand:self.fullDeck];
+//    self.hand = [self.hand dealHand:self.fullDeck];
     
     [self updateUI];
 }
@@ -72,38 +70,78 @@
     self.Table.backgroundColor=[UIColor darkGrayColor];
     [self.view addSubview:self.Table];
 
-    for(int i=0;i<12;i++) {
-        CGSetCard *lCard=((CGSetCard *) self.hand.handOfCards[i]);
-        lCard.cardViewButton  = [self.Table addCard];
-        lCard.cardViewButton.cardColor=lCard.cardColor;
-        lCard.cardViewButton.cardShape=lCard.cardShape;
-        lCard.cardViewButton.cardFill=lCard.cardFill;
-        lCard.cardViewButton.cardQuantity=lCard.cardQuantity;
+    [self dealHand: self.hand toTable:self.Table from:self.fullDeck];
+    self.TableCards=self.Table.subviews;
+    [self updateUI];
+}
+
+- (void) dealHand: (CGSetHand *) Hand toTable: (CGSetView *) Table from:(CGSetDeck *) Deck
+{
+    for(int i=0;i<Hand.handOfCards.count;i++)
+        [Hand.handOfCards removeObjectAtIndex:i];
+    for(CGSetView * sv  in Table.subviews) {
+        [sv removeFromSuperview];
+    }
+    for(int i=0;i<Hand.setHandSize;i++){
+        [self dealCardToHand: Hand andTable:Table from: Deck];
     }
     self.TableCards=self.Table.subviews;
-    for(int i=0;i<self.TableCards.count;i++) {
-        UIView *card = self.TableCards[i];
-        UITapGestureRecognizer * tapRecognizer  = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tableCardTap:)];
-        [tapRecognizer setNumberOfTapsRequired:1];
-        [tapRecognizer setNumberOfTouchesRequired:1];
-        [card addGestureRecognizer:tapRecognizer];
-
-        [card setTag:i];
-    }
 }
+
+- (void) dealCardToHand: (CGSetHand *) Hand andTable:(CGSetView*) Table from:(CGSetDeck *) Deck
+{
+    [Hand.handOfCards addObject:[Hand drawRandomCard:Deck]];
+    NSLog(@"Dealing Card %@",[((CGSetCard *)Hand.handOfCards.lastObject) contents]);
+    CGSetCard *lCard=[Hand.handOfCards lastObject];
+    [self assignHandCard:lCard toTableCard:[Table addCard]];
+    UITapGestureRecognizer * tapRecognizer  = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tableCardTap:)];
+    [tapRecognizer setNumberOfTapsRequired:1];
+    [tapRecognizer setNumberOfTouchesRequired:1];
+    [lCard.cardViewButton addGestureRecognizer:tapRecognizer];
+    
+    [lCard.cardViewButton setTag:[self.hand.handOfCards count]-1];
+}
+
 - (IBAction)RedealButtonPress:(UIButton *)sender {
-    [self removeMatchesFromBoard];
-    self.hand=nil;
-    self.hand=[[CGSetHand alloc] init];
-    if(self.fullDeck.deckSize>=15)
-    {
-        self.hand = [self.hand dealHand:self.fullDeck];
-        [self.MainDeckView setNeedsDisplay];
-        [self updateUI];
+    if(self.matchedCards.count){ // if there are matches on the board replace them instead of redealing the entire board.
+        [self reDealMatchesOnBoard];
     } else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" message:@"You have exhausted your deck" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Restart", nil];
-        [alert show];
-    }
+        if(self.Table.subviews.count==15)
+        {   //Reset entire table since we are asking for a redeal with 15 cards showing
+            //First remove cards 13,14,15 from table so we are back to the standard 12 card layout
+            //and then wipe the whole hand.
+            for(NSInteger i=self.Table.subviews.count;i>12;i--) {
+                [self removeCardAtIndex:i-1 fromBoard:self.hand];
+                self.TableCards=self.Table.subviews;
+            }
+            // Wipeout hand
+            self.hand=nil;
+            self.hand=[[CGSetHand alloc] init];
+            // do we have at least 12 cards left in full deck
+            if(self.fullDeck.deckSize>=12)
+            {
+                //There are enough cards, so deal a new hand
+                [self dealHand: self.hand toTable:self.Table from:self.fullDeck];
+                [self.MainDeckView setNeedsDisplay];
+                [self updateUI];
+            } else {
+                // There are not enough cards so throw an error.
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" message:@"You have exhausted your deck" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Restart", nil];
+                [alert show];
+            }
+        } else {  // There are only 12 cards on the table.
+            if(self.fullDeck.deckSize>=3) {  // There are 3 or more cards left in the full deck
+                for (int i=0;i<3;i++){  // Add 3 new cards
+                    [self dealCardToHand:self.hand andTable:self.Table from:self.fullDeck];
+                    [self updateUI];
+                }
+                self.TableCards=self.Table.subviews;
+            }else { // less than 3 cards left in deck throw error.
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" message:@"You have exhausted your deck" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Restart", nil];
+                [alert show];
+            }
+        }
+    } // end of check for additional matches.  If there were matches we replaced them and just skipped this method.
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -119,6 +157,11 @@
 
 - (void) resetGame
 {
+    //First remove cards 13,14,15 from table
+    for(NSInteger i=self.Table.subviews.count;i>12;i--) {
+        [self removeCardAtIndex:i-1 fromBoard:self.hand];
+    }
+    
     self.fullDeck=nil;
     for(CGSetCard * card in self.hand.handOfCards){
         card.cardViewButton.cardChosen=NO;
@@ -139,21 +182,46 @@
 }
 
 - (IBAction)ClearMatchesButtonPress:(UIButton *)sender {
-    [self removeMatchesFromBoard];
+    [self reDealMatchesOnBoard];
     [self updateUI];
 }
 
-- (void) removeMatchesFromBoard{
-    for(int j=0;j<self.matchedCards.count;j++)
-    {
-        [self.hand.handOfCards replaceObjectAtIndex:((NSNumber *)[self.matchedCards objectAtIndex:j]).integerValue
-                                         withObject:[self removeCardFromBoard:[self.hand.handOfCards objectAtIndex:((NSNumber *)[self.matchedCards objectAtIndex:j]).integerValue]]];
-    }
-    self.matchedCards=nil;
-    self.selectedCards=nil;
+- (void) assignHandCard: (CGSetCard *) card toTableCard: (CGSetCardView *) cardView
+{
+    card.cardViewButton=cardView;
+    cardView.cardMatched=NO;
+    cardView.cardColor=card.cardColor;
+    cardView.cardShape=card.cardShape;
+    cardView.cardFill=card.cardFill;
+    cardView.cardQuantity=card.cardQuantity;
 }
 
-- (CGSetCard *) removeCardFromBoard: (CGSetCard *) card
+- (BOOL) reDealMatchesOnBoard{
+    BOOL Matches=NO;
+    if(self.matchedCards.count>self.fullDeck.deckOfCards.count) {
+        // There are not enough cards so throw an error.
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" message:@"You have exhausted your deck" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Restart", nil];
+        [alert show];
+    } else {
+        for(int j=0;j<self.matchedCards.count;j++)
+        {
+            CGSetCard * oldCard=[[CGSetCard alloc] init];
+            CGSetCard * newCard=[[CGSetCard alloc] init];
+            Matches=YES;
+            NSInteger matchedCardIndex=((NSNumber *)[self.matchedCards objectAtIndex:j]).integerValue;
+            oldCard= [self.hand.handOfCards objectAtIndex:matchedCardIndex];
+            newCard= [self replaceCardOnBoard:oldCard];
+            [self.hand.handOfCards replaceObjectAtIndex:matchedCardIndex withObject:newCard];
+            oldCard=nil;
+            newCard=nil;
+        }
+        self.matchedCards=nil;
+        self.selectedCards=nil;
+    }
+    return Matches;
+}
+
+- (CGSetCard *) replaceCardOnBoard: (CGSetCard *) card
 {
     card.cardChosen=NO;
     card.cardViewButton.cardMatched=NO;
@@ -162,11 +230,26 @@
     {
         [sv removeFromSuperview];
     }
+
     //Animate throwing cards away;
     [self.MainDeckView setNeedsDisplay];
     CGSetCard *newCard=[self.hand drawRandomCard:self.fullDeck];
     newCard.cardViewButton=card.cardViewButton;
+    newCard.cardViewButton.cardColor=newCard.cardColor;
+    newCard.cardViewButton.cardShape=newCard.cardShape;
+    newCard.cardViewButton.cardFill=newCard.cardFill;
+    newCard.cardViewButton.cardQuantity=newCard.cardQuantity;
+
     return newCard;
+}
+
+- (void) removeCardAtIndex: (NSInteger) index fromBoard:(CGSetHand *) hand
+{
+    CGSetCard * oldCard=[[CGSetCard alloc] init];
+    oldCard=[hand.handOfCards objectAtIndex:index];
+    
+    [oldCard.cardViewButton removeSubview:oldCard.cardViewButton];
+    [hand.handOfCards removeObjectAtIndex:index];
 }
 
 - (CGSetHand *) buildArrayFromReferenceArray: (NSArray *) sourceArray
@@ -182,6 +265,7 @@
 
 - (IBAction)tableCardTap:(UITapGestureRecognizer *)sender
 {
+    NSLog(@"Sender.view.tag=%ld",(long)sender.view.tag);
     BOOL isCardChosen=[[self.hand.handOfCards objectAtIndex:sender.view.tag] cardChosen];
     if(!isCardChosen)
     {
@@ -192,6 +276,7 @@
             [self.selectedCards addObject:[NSNumber numberWithInteger:refcard]];
             [[self.hand.handOfCards objectAtIndex:refcard] setCardChosen:YES];
             [[[self.hand.handOfCards objectAtIndex:refcard] cardViewButton] setCardChosen:YES];
+            [[[self.hand.handOfCards objectAtIndex:refcard] cardViewButton] setNeedsDisplay];
             if(self.selectedCards.count>2)
             {
                 //check for a match
@@ -232,14 +317,15 @@
             }
         }
     }
+    
     [self updateUI];
 }
 
 - (NSInteger) findCardInHand: (UIView *) tableCard
 {
     int i;
-    for (i=0;i<self.TableCards.count;i++)
-        if([[self.hand.handOfCards objectAtIndex:i] cardViewButton]==tableCard)
+    for (i=0;i<self.hand.handOfCards.count;i++)
+        if([[[self.hand.handOfCards objectAtIndex:i] cardViewButton] tag]==tableCard.tag)
         {
             ((CGSetCard *)self.hand.handOfCards[i]).cardChosen=YES;
             NSLog(@"in findCardInHand %d", [(CGSetCard*) self.hand.handOfCards[i] cardChosen]);
@@ -287,16 +373,5 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

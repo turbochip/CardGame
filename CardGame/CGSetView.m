@@ -83,7 +83,18 @@
         self.o_x=FIRSTCARDX;
         self.o_y=self.o_y+CARDHEIGHT+CARDSPACINGVERTICAL;
     }
+    
     return self.card;
+}
+
+- (void) willRemoveSubview:(UIView *)subview
+{
+    self.o_x=self.o_x-CARDWIDTH-CARDSPACINGHORIZONTAL;
+    if(self.o_x<=0)
+    {
+        self.o_y=self.o_y-CARDHEIGHT-CARDSPACINGVERTICAL;
+        self.o_x=((CARDWIDTH+CARDSPACINGHORIZONTAL)*4)+CARDSPACINGHORIZONTAL;
+    }
 }
 
 @end

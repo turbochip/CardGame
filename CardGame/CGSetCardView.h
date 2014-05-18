@@ -18,4 +18,6 @@
 @property (nonatomic) BOOL cardChosen;
 @property (nonatomic) BOOL cardMatched;
 
+- (void) removeSubview: (CGSetCardView *) sv;
+
 @end

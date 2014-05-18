@@ -12,11 +12,15 @@
 @end
 
 @implementation CGSetHand
-#define HANDSIZE 15
+//#define HANDSIZE 12
+- (NSInteger) setHandSize
+{
+    return 12;
+}
 
 - (CGSetHand *) dealHand: (CGSetDeck *) cardDeck
 {
-    for(int i=0;i<HANDSIZE;i++){
+    for(int i=0;i<self.handSize;i++){
         // add card dealing animation
         [self.handOfCards addObject:[self drawRandomCard:cardDeck]];
     }

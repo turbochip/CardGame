@@ -10,6 +10,7 @@
 #include "CGSetCard.h"
 #include "CGSetDeck.h"
 @interface CGSetHand : CGHand
+@property (nonatomic,readonly) NSInteger setHandSize;
 - (CGSetHand *) dealHand: (CGSetDeck *) cardDeck;
 - (CGSetCard *) drawRandomCard: (CGSetDeck *) cardDeck;
 
