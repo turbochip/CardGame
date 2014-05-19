@@ -66,10 +66,7 @@
     [super viewDidLoad];
     
     [self start];
-    self.Table=[[CGSetView alloc] initWithFrame:CGRectMake(15, 20,290, 260)];
     self.Table.backgroundColor=[UIColor darkGrayColor];
-    [self.view addSubview:self.Table];
-
     [self dealHand: self.hand toTable:self.Table from:self.fullDeck];
     self.TableCards=self.Table.subviews;
     [self updateUI];
@@ -357,10 +354,10 @@
                 [currentCard cardViewButton].backgroundColor=[UIColor whiteColor];
             }
         }
-        NSString *tempStr=[[NSString alloc] initWithFormat:@"%ld Cards in deck",self.fullDeck.deckSize];
+        NSString *tempStr=[[NSString alloc] initWithFormat:@"%ld Cards in deck",(long)self.fullDeck.deckSize];
         [self.cardsInDeckLabel setText:tempStr];
         tempStr=nil;
-        tempStr=[[NSString alloc] initWithFormat:@"%ld Sets found",self.setScore];
+        tempStr=[[NSString alloc] initWithFormat:@"%ld Sets found",(long)self.setScore];
         [self.setsFoundLabel setText:tempStr];
         [currentCard.cardViewButton setNeedsDisplay];
     }

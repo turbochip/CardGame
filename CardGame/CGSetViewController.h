@@ -22,6 +22,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *setsFoundLabel;
 @property (strong, nonatomic) IBOutlet UILabel *cardsInDeckLabel;
 @property (strong, nonatomic) IBOutlet CGSetCardView *MainDeckView;
-@property (strong, nonatomic)  CGSetView *Table;
+@property (weak, nonatomic) IBOutlet CGSetView *Table;
 
 @end

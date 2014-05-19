@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="VEy-pZ-jXc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="VEy-pZ-jXc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -16,9 +16,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="HTs-Zy-1jq">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="HTs-Zy-1jq">
                                 <rect key="frame" x="20" y="480" width="66" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="66" id="liq-wb-0Uj"/>
+                                </constraints>
                                 <state key="normal" title="Redeal">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -26,7 +29,7 @@
                                     <action selector="RedealButtonPress:" destination="ZTz-I3-xYW" eventType="touchUpInside" id="7ev-pq-FO1"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="1Tf-6l-5EX">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="1Tf-6l-5EX">
                                 <rect key="frame" x="132" y="474" width="49" height="36"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="New Game">
@@ -36,9 +39,12 @@
                                     <action selector="NewGameButtonPress:" destination="ZTz-I3-xYW" eventType="touchUpInside" id="mWR-6S-e0D"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="BWZ-dH-eJS">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="BWZ-dH-eJS">
                                 <rect key="frame" x="231" y="474" width="69" height="36"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="69" id="wQ3-8M-pnm"/>
+                                </constraints>
                                 <state key="normal" title="Clear Matches">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -46,31 +52,63 @@
                                     <action selector="ClearMatchesButtonPress:" destination="ZTz-I3-xYW" eventType="touchUpInside" id="QMx-FJ-AkD"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F7Z-V1-E8V" customClass="CGMainSetDeckView">
-                                <rect key="frame" x="20" y="323" width="90" height="120"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F7Z-V1-E8V" customClass="CGMainSetDeckView">
+                                <rect key="frame" x="20" y="346" width="90" height="120"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="00 Cards Left in Deck" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bre-nM-coi">
-                                <rect key="frame" x="132" y="422" width="168" height="21"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00 Cards Left in Deck" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bre-nM-coi">
+                                <rect key="frame" x="118" y="445" width="166" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="00 Sets Found" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qiH-B1-qsH">
-                                <rect key="frame" x="132" y="385" width="168" height="21"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00 Sets Found" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qiH-B1-qsH">
+                                <rect key="frame" x="118" y="416" width="114" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="114" id="W4D-Fg-IUe"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dHL-cX-ATV" customClass="CGSetView">
+                                <rect key="frame" x="20" y="20" width="280" height="318"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.78431379795074463" green="0.20000001788139343" blue="0.078431375324726105" alpha="1" colorSpace="deviceRGB"/>
+                        <constraints>
+                            <constraint firstItem="F7Z-V1-E8V" firstAttribute="leading" secondItem="xiO-6H-1Pr" secondAttribute="leading" constant="20" symbolic="YES" id="574-p9-khl"/>
+                            <constraint firstItem="F7Z-V1-E8V" firstAttribute="top" secondItem="ttU-Fc-B7L" secondAttribute="bottom" constant="326" id="7xz-FQ-LNU"/>
+                            <constraint firstItem="qiH-B1-qsH" firstAttribute="top" secondItem="ttU-Fc-B7L" secondAttribute="bottom" constant="396" id="Gxb-zg-okw"/>
+                            <constraint firstItem="dHL-cX-ATV" firstAttribute="leading" secondItem="F7Z-V1-E8V" secondAttribute="leading" id="MtC-8B-UZq"/>
+                            <constraint firstItem="qiH-B1-qsH" firstAttribute="leading" secondItem="F7Z-V1-E8V" secondAttribute="trailing" constant="8" symbolic="YES" id="Obd-rP-ZSq"/>
+                            <constraint firstAttribute="trailing" secondItem="qiH-B1-qsH" secondAttribute="trailing" constant="88" id="P4F-gx-c1P"/>
+                            <constraint firstItem="BWZ-dH-eJS" firstAttribute="leading" secondItem="1Tf-6l-5EX" secondAttribute="trailing" constant="50" id="SEH-EC-wIJ"/>
+                            <constraint firstItem="bre-nM-coi" firstAttribute="bottom" secondItem="F7Z-V1-E8V" secondAttribute="bottom" id="THw-tc-GlY"/>
+                            <constraint firstItem="HTs-Zy-1jq" firstAttribute="bottom" secondItem="1Tf-6l-5EX" secondAttribute="bottom" id="Tbi-1O-Sgv"/>
+                            <constraint firstItem="HTs-Zy-1jq" firstAttribute="top" secondItem="F7Z-V1-E8V" secondAttribute="bottom" constant="14" id="Use-p7-MVG"/>
+                            <constraint firstItem="BWZ-dH-eJS" firstAttribute="top" secondItem="1Tf-6l-5EX" secondAttribute="top" id="dFb-09-TQM"/>
+                            <constraint firstItem="HTs-Zy-1jq" firstAttribute="bottom" secondItem="BWZ-dH-eJS" secondAttribute="bottom" id="kG4-sl-J1x"/>
+                            <constraint firstItem="HTs-Zy-1jq" firstAttribute="leading" secondItem="F7Z-V1-E8V" secondAttribute="leading" id="kkL-sU-F6H"/>
+                            <constraint firstItem="BWZ-dH-eJS" firstAttribute="top" secondItem="bre-nM-coi" secondAttribute="bottom" constant="8" symbolic="YES" id="lzd-SG-Ma5"/>
+                            <constraint firstItem="bre-nM-coi" firstAttribute="top" secondItem="qiH-B1-qsH" secondAttribute="bottom" constant="8" symbolic="YES" id="pph-Zc-Rq1"/>
+                            <constraint firstItem="F7Z-V1-E8V" firstAttribute="top" secondItem="dHL-cX-ATV" secondAttribute="bottom" constant="8" symbolic="YES" id="tFo-Jy-j8H"/>
+                            <constraint firstAttribute="trailing" secondItem="BWZ-dH-eJS" secondAttribute="trailing" constant="20" symbolic="YES" id="vLk-DU-agv"/>
+                            <constraint firstItem="dHL-cX-ATV" firstAttribute="trailing" secondItem="BWZ-dH-eJS" secondAttribute="trailing" id="vT7-dp-klk"/>
+                            <constraint firstItem="1Tf-6l-5EX" firstAttribute="leading" secondItem="HTs-Zy-1jq" secondAttribute="trailing" constant="46" id="vbX-Au-AdK"/>
+                            <constraint firstItem="bre-nM-coi" firstAttribute="leading" secondItem="F7Z-V1-E8V" secondAttribute="trailing" constant="8" symbolic="YES" id="x0d-rw-wg9"/>
+                            <constraint firstItem="dHL-cX-ATV" firstAttribute="top" secondItem="xiO-6H-1Pr" secondAttribute="top" constant="20" symbolic="YES" id="ykt-B7-cRT"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Set" id="xL9-ZM-fuD"/>
                     <navigationItem key="navigationItem" id="JEC-k9-AT2"/>
                     <connections>
                         <outlet property="MainDeckView" destination="F7Z-V1-E8V" id="HbE-3U-TXr"/>
+                        <outlet property="Table" destination="dHL-cX-ATV" id="g8h-W6-C0q"/>
                         <outlet property="cardsInDeckLabel" destination="bre-nM-coi" id="KYi-mS-7iy"/>
                         <outlet property="setsFoundLabel" destination="qiH-B1-qsH" id="kcL-ad-Yc1"/>
                     </connections>
