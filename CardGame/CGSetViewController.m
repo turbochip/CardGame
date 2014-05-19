@@ -66,9 +66,9 @@
     [super viewDidLoad];
     
     [self start];
-    self.Table=[[CGSetView alloc] initWithFrame:CGRectMake(15, 20,290, 260)];
+//    self.Table=[[CGSetView alloc] initWithFrame:CGRectMake(15, 20,290, 260)];
     self.Table.backgroundColor=[UIColor darkGrayColor];
-    [self.view addSubview:self.Table];
+//    [self.view addSubview:self.Table];
 
     [self dealHand: self.hand toTable:self.Table from:self.fullDeck];
     self.TableCards=self.Table.subviews;

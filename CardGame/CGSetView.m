@@ -78,6 +78,9 @@
     [self.table addObject:self.card];
     [self addSubview:self.card];
     self.o_x=self.o_x+CARDWIDTH+CARDSPACINGHORIZONTAL;
+    NSLog(@"drawRect self.frame Origin=%f,%f self.size=%f,%f",self.frame.origin.x,self.frame.origin.y,self.frame.size.width,self.frame.size.height);
+    NSLog(@"drawRect self.bounds Origin=%f,%f self.size=%f,%f",self.bounds.origin.x,self.bounds.origin.y,self.bounds.size.width,self.bounds.size.height);
+    NSLog(@"TestPoint = %f,%f",self.o_x+CARDWIDTH+CARDSPACINGHORIZONTAL,self.o_y);
     if(!CGRectContainsPoint(self.bounds, CGPointMake(self.o_x+CARDWIDTH+CARDSPACINGHORIZONTAL, self.o_y)))
     {
         self.o_x=FIRSTCARDX;
