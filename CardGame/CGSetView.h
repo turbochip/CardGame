@@ -10,6 +10,7 @@
 #import "CGSetCardView.h"
 
 @interface CGSetView : UIView
+@property (nonatomic,strong) NSMutableArray *table;
 
 
 - (CGSetCardView *) addCard;

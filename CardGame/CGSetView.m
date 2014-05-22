@@ -11,7 +11,7 @@
 
 @interface CGSetView()
 @property (nonatomic,strong) CGSetCardView* card;
-@property (nonatomic,strong) NSMutableArray *table;
+//@property (nonatomic,strong) NSMutableArray *table;
 @property (nonatomic) CGFloat o_x;
 @property (nonatomic) CGFloat o_y;
 @end

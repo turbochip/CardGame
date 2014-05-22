@@ -19,7 +19,6 @@
 @property (nonatomic,strong) CGMainSetDeckView* deckView;
 
 - (CGSetHand *) buildArrayFromReferenceArray: (NSArray *) sourceArray;
-- (NSInteger) findCardInHand: (UIView *) tableCard;
 @end
 
 @implementation CGSetViewController
@@ -29,7 +28,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        [self start];
+//        [self start];
     }
     return self;
 }
@@ -55,7 +54,7 @@
     self.hand = [[CGSetHand alloc] init];
     
     self.fullDeck = [self.fullDeck createSetDeckof:self.setCard];
-//    self.hand = [self.hand dealHand:self.fullDeck];
+    [self dealHand: self.hand toTable:self.Table from:self.fullDeck];
     
     [self updateUI];
 }
@@ -67,46 +66,43 @@
     
     [self start];
     self.Table.backgroundColor=[UIColor darkGrayColor];
-    [self dealHand: self.hand toTable:self.Table from:self.fullDeck];
-    self.TableCards=self.Table.subviews;
-    [self updateUI];
+//    self.TableCards=self.Table.subviews;
+//    [self updateUI];
 }
 
 - (void) dealHand: (CGSetHand *) Hand toTable: (CGSetView *) Table from:(CGSetDeck *) Deck
 {
+    // remove any existing cards
     for(int i=0;i<Hand.handOfCards.count;i++)
         [Hand.handOfCards removeObjectAtIndex:i];
+    
+    //remove subviews from table
     for(CGSetView * sv  in Table.subviews) {
         [sv removeFromSuperview];
     }
-    for(int i=0;i<Hand.setHandSize;i++){
+    
+    // deal individual cards to table
+    for(int i=0;i<Hand.setHandMinimumSize;i++){
         [self dealCardToHand: Hand andTable:Table from: Deck];
     }
-    self.TableCards=self.Table.subviews;
+//    self.TableCards=self.Table.subviews;
 }
 
 - (void) dealCardToHand: (CGSetHand *) Hand andTable:(CGSetView*) Table from:(CGSetDeck *) Deck
 {
+    // get a random card from the deck
     [Hand.handOfCards addObject:[Hand drawRandomCard:Deck]];
     NSLog(@"Dealing Card %@",[((CGSetCard *)Hand.handOfCards.lastObject) contents]);
-    CGSetCard *lCard=[Hand.handOfCards lastObject];
-    [self assignHandCard:lCard toTableCard:[Table addCard]];
-    UITapGestureRecognizer * tapRecognizer  = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tableCardTap:)];
-    [tapRecognizer setNumberOfTapsRequired:1];
-    [tapRecognizer setNumberOfTouchesRequired:1];
-    [lCard.cardViewButton addGestureRecognizer:tapRecognizer];
-    
-    [lCard.cardViewButton setTag:[self.hand.handOfCards count]-1];
 }
 
 - (IBAction)RedealButtonPress:(UIButton *)sender {
     if(self.matchedCards.count){ // if there are matches on the board replace them instead of redealing the entire board.
         [self reDealMatchesOnBoard];
     } else {
-        if(self.Table.subviews.count==15)
+        if(self.hand.handOfCards.count==self.hand.setHandMaximumSize)
         {   //Reset entire table since we are asking for a redeal with 15 cards showing
-            //First remove cards 13,14,15 from table so we are back to the standard 12 card layout
             //and then wipe the whole hand.
+            [self clearTable];
             for(NSInteger i=self.Table.subviews.count;i>12;i--) {
                 [self removeCardAtIndex:i-1 fromBoard:self.hand];
                 self.TableCards=self.Table.subviews;
@@ -115,7 +111,7 @@
             self.hand=nil;
             self.hand=[[CGSetHand alloc] init];
             // do we have at least 12 cards left in full deck
-            if(self.fullDeck.deckSize>=12)
+            if(self.fullDeck.deckSize>=self.hand.setHandMinimumSize)
             {
                 //There are enough cards, so deal a new hand
                 [self dealHand: self.hand toTable:self.Table from:self.fullDeck];
@@ -152,26 +148,22 @@
     }
 }
 
-- (void) resetGame
+- (void) clearTable
 {
-    //First remove cards 13,14,15 from table
-    for(NSInteger i=self.Table.subviews.count;i>12;i--) {
-        [self removeCardAtIndex:i-1 fromBoard:self.hand];
-    }
-    
-    self.fullDeck=nil;
-    for(CGSetCard * card in self.hand.handOfCards){
-        card.cardViewButton.cardChosen=NO;
-        card.cardViewButton.cardMatched=NO;
-        for(UIImageView *sv in card.cardViewButton.subviews)
-            sv.removeFromSuperview;
-    }
+    for(CGSetCardView *sv in self.Table.subviews)
+        sv.removeFromSuperview;
     self.hand=nil;
     self.selectedCards=nil;
     self.matchedCards=nil;
+
+}
+- (void) resetGame
+{
+    //First remove cards 13,14,15 from table
+    [self clearTable];
     self.setScore=0;
+    self.fullDeck=nil;
     [self start];
-   
 }
 
 - (IBAction)NewGameButtonPress:(UIButton *)sender {
@@ -186,10 +178,13 @@
 - (void) assignHandCard: (CGSetCard *) card toTableCard: (CGSetCardView *) cardView
 {
     card.cardViewButton=cardView;
-    cardView.cardMatched=NO;
+    cardView.cardMatched=card.isMatched;
+    cardView.cardChosen=card.cardChosen;
     cardView.cardColor=card.cardColor;
     cardView.cardShape=card.cardShape;
     cardView.cardFill=card.cardFill;
+    cardView.cardBackImage=card.cardBackImage;
+    NSLog(@"Set cardview.cardbackimage to %@",cardView.cardBackImage);
     cardView.cardQuantity=card.cardQuantity;
 }
 
@@ -269,23 +264,22 @@
         if(self.selectedCards.count<3)
         {
             //sender.view.backgroundColor=[UIColor grayColor];
-            NSInteger refcard=[self findCardInHand:sender.view];
+            //NSInteger refcard=[self findCardInHand:sender.view];
+            NSInteger refcard=sender.view.tag;
             [self.selectedCards addObject:[NSNumber numberWithInteger:refcard]];
             [[self.hand.handOfCards objectAtIndex:refcard] setCardChosen:YES];
-            [[[self.hand.handOfCards objectAtIndex:refcard] cardViewButton] setCardChosen:YES];
-            [[[self.hand.handOfCards objectAtIndex:refcard] cardViewButton] setNeedsDisplay];
+//            [[[self.hand.handOfCards objectAtIndex:refcard] cardViewButton] setCardChosen:YES];
+//            [[[self.hand.handOfCards objectAtIndex:refcard] cardViewButton] setNeedsDisplay];
             if(self.selectedCards.count>2)
             {
                 //check for a match
                 BOOL result=[self.hand match: [self buildArrayFromReferenceArray:self.selectedCards]];
                 if(!result) {
                     for(CGSetCard * card in [self buildArrayFromReferenceArray:self.selectedCards].handOfCards){
-                        //card.cardViewButton.backgroundColor=[UIColor whiteColor];
                         card.cardChosen=NO;
                         card.cardViewButton.cardChosen=NO;
                     }
                 } else {
-                    //self.matchedCards=[[NSMutableArray alloc] init];
                     self.setScore++;
                     for(int i=0;i<self.selectedCards.count;i++)
                     {
@@ -295,16 +289,13 @@
                         NSInteger randback=(arc4random() % 3)+1;
                         switch (randback) {
                             case 1:
-                                card.cardViewButton.cardBackImage=@"splogo.png";
-                                [card.cardViewButton setNeedsDisplay];
+                                card.cardBackImage=@"splogo.png";
                                 break;
                             case 2:
-                                card.cardViewButton.cardBackImage=@"MerckLogo.png";
-                                [card.cardViewButton setNeedsDisplay];
+                                card.cardBackImage=@"MerckLogo.png";
                                 break;
                             case 3:
-                                card.cardViewButton.cardBackImage=@"bayer-logo.png";
-                                [card.cardViewButton setNeedsDisplay];
+                                card.cardBackImage=@"bayer-logo.png";
                                 break;
                         }
 
@@ -318,6 +309,7 @@
     [self updateUI];
 }
 
+/*
 - (NSInteger) findCardInHand: (UIView *) tableCard
 {
     int i;
@@ -330,10 +322,36 @@
         }
     return i;
 }
+*/
 
 - (void)updateUI
 {
-    for(int i=0; i<self.TableCards.count;i++) {
+    for (CGSetCardView *pcard in self.Table.subviews)
+         [pcard removeFromSuperview];
+    self.Table.table=nil;
+    NSInteger i=0;
+    for (CGSetCard *card in self.hand.handOfCards)
+    {
+        CGSetCardView *pcard=[self.Table addCard];
+        [self assignHandCard:card toTableCard:pcard];
+        // create tap gesture recognizer for the physical card.
+        UITapGestureRecognizer * tapRecognizer  = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tableCardTap:)];
+        [tapRecognizer setNumberOfTapsRequired:1];
+        [tapRecognizer setNumberOfTouchesRequired:1];
+        [card.cardViewButton addGestureRecognizer:tapRecognizer];
+        
+        // tag physical card with object index for logical card
+        [card.cardViewButton setTag:i++];
+        
+        if(card.cardChosen)
+            card.cardViewButton.backgroundColor=[UIColor grayColor];
+        else
+            card.cardViewButton.backgroundColor=[UIColor whiteColor];
+        
+        [card.cardViewButton setNeedsDisplay];
+
+    }
+/*    for(int i=0; i<self.TableCards.count;i++) {
         CGSetCard *currentCard=[self.hand.handOfCards objectAtIndex:i];
         currentCard.cardViewButton=[self.TableCards objectAtIndex:i];
         NSLog(@"i=%d, tag=%ld",i,(long)[[self.TableCards objectAtIndex:i] tag]);
@@ -361,6 +379,13 @@
         [self.setsFoundLabel setText:tempStr];
         [currentCard.cardViewButton setNeedsDisplay];
     }
+ */
+    NSString *tempStr=[[NSString alloc] initWithFormat:@"%ld Cards in deck",(long)self.fullDeck.deckSize];
+    [self.cardsInDeckLabel setText:tempStr];
+    tempStr=nil;
+    tempStr=[[NSString alloc] initWithFormat:@"%ld Sets",(long)self.setScore];
+    [self.setsFoundLabel setText:tempStr];
+//    [currentCard.cardViewButton setNeedsDisplay];
     
 }
 

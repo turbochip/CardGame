@@ -72,6 +72,12 @@
     [self setNeedsDisplay];
 }
 
+- (void) setCardBackImage:(NSString *)cardBackImage
+{
+    _cardBackImage=cardBackImage;
+    [self setNeedsDisplay];
+}
+
 
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
@@ -91,18 +97,13 @@
                 [self drawSquiggle:rect];
                 break;
         }
-        if(self.cardChosen)
-            self.backgroundColor=[UIColor grayColor];
-        else
-            self.backgroundColor=[UIColor whiteColor];
-        [(NSAttributedString*)self.stringToDraw drawAtPoint:CGPointMake(0, 0)];
     } else {
+        NSLog(@"Card is matched");
         UIImage *backImage=[UIImage imageNamed:self.cardBackImage];
 
         UIImageView *backView=[[UIImageView alloc] initWithFrame: self.bounds];
         [backView setImage:backImage];
         [self addSubview:backView];
-        
     }
 }
 

@@ -13,9 +13,14 @@
 
 @implementation CGSetHand
 //#define HANDSIZE 12
-- (NSInteger) setHandSize
+- (NSInteger) setHandMinimumSize
 {
     return 12;
+}
+
+- (NSInteger) setHandMaximumSize
+{
+    return 15;
 }
 
 - (CGSetHand *) dealHand: (CGSetDeck *) cardDeck
