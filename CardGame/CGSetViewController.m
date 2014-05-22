@@ -357,18 +357,11 @@
         NSString *tempStr=[[NSString alloc] initWithFormat:@"%ld Cards in deck",(long)self.fullDeck.deckSize];
         [self.cardsInDeckLabel setText:tempStr];
         tempStr=nil;
-        tempStr=[[NSString alloc] initWithFormat:@"%ld Sets found",(long)self.setScore];
+        tempStr=[[NSString alloc] initWithFormat:@"%ld Sets",(long)self.setScore];
         [self.setsFoundLabel setText:tempStr];
         [currentCard.cardViewButton setNeedsDisplay];
     }
     
-}
-
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end
