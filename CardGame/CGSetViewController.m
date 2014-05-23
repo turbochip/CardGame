@@ -263,13 +263,9 @@
     {
         if(self.selectedCards.count<3)
         {
-            //sender.view.backgroundColor=[UIColor grayColor];
-            //NSInteger refcard=[self findCardInHand:sender.view];
             NSInteger refcard=sender.view.tag;
             [self.selectedCards addObject:[NSNumber numberWithInteger:refcard]];
             [[self.hand.handOfCards objectAtIndex:refcard] setCardChosen:YES];
-//            [[[self.hand.handOfCards objectAtIndex:refcard] cardViewButton] setCardChosen:YES];
-//            [[[self.hand.handOfCards objectAtIndex:refcard] cardViewButton] setNeedsDisplay];
             if(self.selectedCards.count>2)
             {
                 //check for a match
@@ -286,6 +282,7 @@
                         CGSetCard *card=[self.hand.handOfCards objectAtIndex:((NSNumber *)[self.selectedCards objectAtIndex:i]).integerValue];
                         [self.matchedCards addObject:[NSNumber numberWithInteger:((NSNumber *)[self.selectedCards objectAtIndex:i]).integerValue]];
                         card.cardViewButton.cardMatched=YES;
+                        card.isMatched=YES;
                         NSInteger randback=(arc4random() % 3)+1;
                         switch (randback) {
                             case 1:
