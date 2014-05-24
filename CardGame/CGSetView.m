@@ -37,6 +37,16 @@
     return self;
 }
 
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        // Initialization code
+    }
+    [self setup];
+    return self;
+}
+
 #pragma mark    Setters & Getters
 
 - (NSMutableArray *) table
@@ -74,11 +84,13 @@
         [self setFrame:CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, self.o_y+10)];
     }
     self.card=[[CGSetCardView alloc] initWithFrame:CGRectMake(self.o_x, self.o_y, CARDWIDTH, CARDHEIGHT)];
-    [self.card setBackgroundColor:[UIColor whiteColor]];
+    [self.card setBackgroundColor:self.superview.backgroundColor];
+
     [self.table addObject:self.card];
     
-    if(self.o_y+CARDHEIGHT+CARDSPACINGVERTICAL> self.frame.size.height)
+    if(self.o_y+CARDHEIGHT+CARDSPACINGVERTICAL> self.frame.size.height){
         [self setFrame:CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, self.o_y+CARDHEIGHT+CARDSPACINGVERTICAL)];
+    }
 
     [self addSubview:self.card];
     
@@ -92,7 +104,6 @@
         self.o_x=FIRSTCARDX;
         self.o_y=self.o_y+CARDHEIGHT+CARDSPACINGVERTICAL;
     }
-     
     return self.card;
 }
 

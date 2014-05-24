@@ -17,19 +17,21 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="HTs-Zy-1jq">
-                                <rect key="frame" x="252" y="138" width="48" height="30"/>
+                                <rect key="frame" x="237" y="138" width="63" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Redeal">
+                                <state key="normal" title="3 More Cards">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="RedealButtonPress:" destination="ZTz-I3-xYW" eventType="touchUpInside" id="7ev-pq-FO1"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="1Tf-6l-5EX">
-                                <rect key="frame" x="243" y="176" width="57" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="1Tf-6l-5EX">
+                                <rect key="frame" x="237" y="176" width="62" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="New Game">
+                                <state key="normal" title="Restart Game">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -40,7 +42,7 @@
                                 <rect key="frame" x="237" y="214" width="63" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Clear Matches">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="ClearMatchesButtonPress:" destination="ZTz-I3-xYW" eventType="touchUpInside" id="QMx-FJ-AkD"/>
@@ -56,9 +58,9 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dHL-cX-ATV" customClass="CGSetView">
-                                <rect key="frame" x="20" y="52" width="215" height="283"/>
+                                <rect key="frame" x="20" y="52" width="215" height="192"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.85224680656934293" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="00 Cards Left in Deck" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bre-nM-coi">
                                 <rect key="frame" x="87" y="23" width="213" height="21"/>
@@ -77,7 +79,7 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="0.78431379795074463" green="0.20000001788139343" blue="0.078431375324726105" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="backgroundColor" red="0.85102075729927007" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="bre-nM-coi" firstAttribute="leading" secondItem="qiH-B1-qsH" secondAttribute="trailing" constant="8" symbolic="YES" id="05m-jk-Eeo"/>
                             <constraint firstItem="qiH-B1-qsH" firstAttribute="top" secondItem="xiO-6H-1Pr" secondAttribute="top" constant="20" symbolic="YES" id="8Nt-ko-YNg"/>
@@ -87,14 +89,15 @@
                             <constraint firstItem="1Tf-6l-5EX" firstAttribute="trailing" secondItem="BWZ-dH-eJS" secondAttribute="trailing" id="OEF-E0-uW6"/>
                             <constraint firstItem="F7Z-V1-E8V" firstAttribute="top" secondItem="bre-nM-coi" secondAttribute="bottom" constant="8" symbolic="YES" id="RkR-ea-TWU"/>
                             <constraint firstItem="HTs-Zy-1jq" firstAttribute="top" secondItem="F7Z-V1-E8V" secondAttribute="bottom" constant="8" symbolic="YES" id="WVe-tc-Kj5"/>
+                            <constraint firstItem="BWZ-dH-eJS" firstAttribute="leading" secondItem="1Tf-6l-5EX" secondAttribute="leading" id="XKd-Gz-SST"/>
                             <constraint firstItem="dHL-cX-ATV" firstAttribute="top" secondItem="bre-nM-coi" secondAttribute="bottom" constant="8" symbolic="YES" id="Ymy-dH-p2Q"/>
+                            <constraint firstItem="BWZ-dH-eJS" firstAttribute="leading" secondItem="HTs-Zy-1jq" secondAttribute="leading" id="ce2-4R-cMX"/>
                             <constraint firstItem="BWZ-dH-eJS" firstAttribute="leading" secondItem="dHL-cX-ATV" secondAttribute="trailing" constant="2" id="fBT-0e-cIF"/>
                             <constraint firstAttribute="trailing" secondItem="bre-nM-coi" secondAttribute="trailing" constant="20" symbolic="YES" id="fCk-Uk-SHk"/>
                             <constraint firstItem="BWZ-dH-eJS" firstAttribute="top" secondItem="1Tf-6l-5EX" secondAttribute="bottom" constant="8" symbolic="YES" id="iEz-me-FFf"/>
                             <constraint firstItem="1Tf-6l-5EX" firstAttribute="top" secondItem="HTs-Zy-1jq" secondAttribute="bottom" constant="8" symbolic="YES" id="m1H-gv-XT8"/>
                             <constraint firstItem="qiH-B1-qsH" firstAttribute="leading" secondItem="xiO-6H-1Pr" secondAttribute="leading" constant="20" symbolic="YES" id="o0Y-xd-dpH"/>
                             <constraint firstAttribute="trailing" secondItem="F7Z-V1-E8V" secondAttribute="trailing" constant="20" symbolic="YES" id="rSz-Qb-g0y"/>
-                            <constraint firstItem="1Tf-6l-5EX" firstAttribute="leading" secondItem="dHL-cX-ATV" secondAttribute="trailing" constant="8" symbolic="YES" id="tke-Bi-MNb"/>
                             <constraint firstItem="HTs-Zy-1jq" firstAttribute="trailing" secondItem="1Tf-6l-5EX" secondAttribute="trailing" id="xrc-2A-DAZ"/>
                             <constraint firstItem="dHL-cX-ATV" firstAttribute="leading" secondItem="xiO-6H-1Pr" secondAttribute="leading" constant="20" symbolic="YES" id="yqC-Xs-2gg"/>
                         </constraints>

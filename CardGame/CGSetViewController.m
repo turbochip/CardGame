@@ -70,7 +70,7 @@
                                                object:nil];
     
     [self start];
-    self.Table.backgroundColor=[UIColor darkGrayColor];
+//    self.Table.backgroundColor=[UIColor darkGrayColor];
 }
 
 - (void) dealHand: (CGSetHand *) Hand toTable: (CGSetView *) Table from:(CGSetDeck *) Deck
@@ -335,23 +335,17 @@
     {
         // add lcard to table creating a pcard then copy all the properties of the lcard display to the pcard.
         CGSetCardView *pcard=[self.Table addCard];
-        [self assignHandCard:card toTableCard:pcard];
+        // tag physical card with object index for logical card
+        [pcard setTag:indexTag++];
+        
         // create tap gesture recognizer for the physical card.
         UITapGestureRecognizer * tapRecognizer  = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tableCardTap:)];
         [tapRecognizer setNumberOfTapsRequired:1];
         [tapRecognizer setNumberOfTouchesRequired:1];
-        [card.cardViewButton addGestureRecognizer:tapRecognizer];
+        [pcard addGestureRecognizer:tapRecognizer];
         
-        // tag physical card with object index for logical card
-        [card.cardViewButton setTag:indexTag++];
-        
-        //set the card background based on whether it is chosen or not.
-        if(card.cardChosen)
-            card.cardViewButton.backgroundColor=[UIColor grayColor];
-        else
-            card.cardViewButton.backgroundColor=[UIColor whiteColor];
-        
-        //we really shouldn't need this here, but just as a failsafe tell view to draw display.
+        [self assignHandCard:card toTableCard:pcard];
+       
         [card.cardViewButton setNeedsDisplay];
 
     }

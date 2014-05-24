@@ -115,20 +115,28 @@
 
 - (void) drawDiamond:(CGRect)rect
 {
-    UIBezierPath *apath;
+    UIBezierPath *apath, *path;
     CGFloat ccx=self.frame.size.width/2;    //card horizontal size x
     CGFloat ccy=self.frame.size.height/2;   //card vertical size y
     CGFloat sw=self.frame.size.width/6;     //shape width
     CGFloat sh=self.frame.size.height/6;    //shape height
     CGFloat sox=ccx-(sw/2);                 //shape origin horizontal x
     CGFloat soy=ccy-(sh/2);  //shape origin vertical x
+    path=[UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:12];
+    [self setClipsToBounds:YES];
+    if(self.cardChosen)
+        [[UIColor grayColor] setFill];
+    else
+        [[UIColor whiteColor] setFill];
+    [path fill];
+    [path stroke];
     [self.cardColor setStroke];
     switch(self.cardFill) {
         case 0:
             [self.cardColor setFill];
             break;
         case 1:
-            [self.backgroundColor setFill];
+            [[UIColor whiteColor] setFill];
             break;
         case 2:
         {
@@ -160,20 +168,28 @@
 
 - (void) drawCircle:(CGRect)rect
 {
-    UIBezierPath *apath;
+    UIBezierPath *apath,*path;
     CGFloat ccx=self.frame.size.width/2;    //card horizontal size x
     CGFloat ccy=self.frame.size.height/2;   //card vertical size y
     CGFloat sw=self.frame.size.width/6;     //shape width
     CGFloat sh=self.frame.size.height/6;    //shape height
     CGFloat sox=ccx-(sw/2);                 //shape origin horizontal x
     CGFloat soy=ccy-(sh/2);  //shape origin vertical x
+    path=[UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:12];
+    [self setClipsToBounds:YES];
+    if(self.cardChosen)
+        [[UIColor grayColor] setFill];
+    else
+        [[UIColor whiteColor] setFill];
+    [path fill];
+    [path stroke];
     [self.cardColor setStroke];
     switch(self.cardFill) {
         case 0:
             [self.cardColor setFill];
             break;
         case 1:
-            [self.backgroundColor setFill];
+            [[UIColor whiteColor] setFill];
             break;
         case 2:
         {
@@ -199,20 +215,28 @@
 
 - (void) drawSquiggle:(CGRect)rect
 {
-    UIBezierPath *apath;
+    UIBezierPath *apath, *path;
     CGFloat ccx=self.frame.size.width/2;    //card horizontal size x
     CGFloat ccy=self.frame.size.height/2;   //card vertical size y
     CGFloat sw=self.frame.size.width/3;     //shape width
     CGFloat sh=self.frame.size.height/6;    //shape height
     CGFloat sox=ccx-(sw/2);                 //shape origin horizontal x
     CGFloat soy=ccy-(sh/2);  //shape origin vertical x
+    path=[UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:12];
+    [self setClipsToBounds:YES];
+    if(self.cardChosen)
+        [[UIColor grayColor] setFill];
+    else
+        [[UIColor whiteColor] setFill];
+    [path fill];
+    [path stroke];
     [self.cardColor setStroke];
     switch(self.cardFill) {
         case 0:
             [self.cardColor setFill];
             break;
         case 1:
-            [self.backgroundColor setFill];
+            [[UIColor whiteColor] setFill];
             break;
         case 2:
         {

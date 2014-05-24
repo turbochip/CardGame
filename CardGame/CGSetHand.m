@@ -65,6 +65,7 @@
        ([selectedCards[0] cardFill] == [selectedCards[2] cardFill])) fillMatch=YES;
     if(([selectedCards[0] cardShape] == [selectedCards[1] cardShape]) &&
        ([selectedCards[0] cardShape] == [selectedCards[2] cardShape])) shapeMatch=YES;
+    // since we are storing the color object, we have to use isequal instead of the the == comparison
     if(([[selectedCards[0] cardColor] isEqual: [selectedCards[1] cardColor]]) &&
        ([[selectedCards[0] cardColor] isEqual: [selectedCards[2] cardColor]])) colorMatch=YES;
 
@@ -78,9 +79,11 @@
     if(([selectedCards[0] cardShape] != [selectedCards[1] cardShape]) &&
        ([selectedCards[0] cardShape] != [selectedCards[2] cardShape]) &&
        ([selectedCards[1] cardShape] != [selectedCards[2] cardShape])) shapeMatch=YES;
-    if(!(([[selectedCards[0] cardColor] isEqual: [selectedCards[1] cardColor]]) &&
-       ([[selectedCards[0] cardColor] isEqual: [selectedCards[2] cardColor]]) &&
-       ([[selectedCards[1] cardColor] isEqual: [selectedCards[2] cardColor]]))) colorMatch=YES;
+    // since we are storing the color object, we have to use isequal instead of the the != comparison
+    // also note the not (!) cannot be performed on the whole statement, it has to be on each and.
+    if(((![[selectedCards[0] cardColor] isEqual: [selectedCards[1] cardColor]]) &&
+       (![[selectedCards[0] cardColor] isEqual: [selectedCards[2] cardColor]]) &&
+       (![[selectedCards[1] cardColor] isEqual: [selectedCards[2] cardColor]]))) colorMatch=YES;
     
     if(qtyMatch && fillMatch && shapeMatch && colorMatch) Matched=YES;
     
