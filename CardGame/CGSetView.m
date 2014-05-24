@@ -11,7 +11,6 @@
 
 @interface CGSetView()
 @property (nonatomic,strong) CGSetCardView* card;
-//@property (nonatomic,strong) NSMutableArray *table;
 @property (nonatomic) CGFloat o_x;
 @property (nonatomic) CGFloat o_y;
 @end
@@ -72,11 +71,15 @@
     if(!self.table.count){
         self.o_x=FIRSTCARDX;
         self.o_y=FIRSTCARDY;
+        [self setFrame:CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, self.o_y+10)];
     }
     self.card=[[CGSetCardView alloc] initWithFrame:CGRectMake(self.o_x, self.o_y, CARDWIDTH, CARDHEIGHT)];
     [self.card setBackgroundColor:[UIColor whiteColor]];
     [self.table addObject:self.card];
     
+    if(self.o_y+CARDHEIGHT+CARDSPACINGVERTICAL> self.frame.size.height)
+        [self setFrame:CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, self.o_y+CARDHEIGHT+CARDSPACINGVERTICAL)];
+
     [self addSubview:self.card];
     
     self.o_x=self.o_x+CARDWIDTH+CARDSPACINGHORIZONTAL;
@@ -85,21 +88,12 @@
     NSLog(@"test point=%f,%f",self.o_x+CARDWIDTH+CARDSPACINGHORIZONTAL,self.o_y);
     if(!CGRectContainsPoint(self.bounds, CGPointMake(self.o_x+CARDWIDTH+CARDSPACINGHORIZONTAL, self.o_y)))
     {
+        NSLog(@"Point not in frame adding new line");
         self.o_x=FIRSTCARDX;
         self.o_y=self.o_y+CARDHEIGHT+CARDSPACINGVERTICAL;
     }
-    
+     
     return self.card;
-}
-
-- (void) willRemoveSubview:(UIView *)subview
-{
-    self.o_x=self.o_x-CARDWIDTH-CARDSPACINGHORIZONTAL;
-    if(self.o_x<=0)
-    {
-        self.o_y=self.o_y-CARDHEIGHT-CARDSPACINGVERTICAL;
-        self.o_x=((CARDWIDTH+CARDSPACINGHORIZONTAL)*4)+CARDSPACINGHORIZONTAL;
-    }
 }
 
 @end
