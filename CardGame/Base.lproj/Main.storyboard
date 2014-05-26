@@ -105,7 +105,7 @@
                     <tabBarItem key="tabBarItem" title="Set" id="xL9-ZM-fuD"/>
                     <navigationItem key="navigationItem" id="JEC-k9-AT2"/>
                     <connections>
-                        <outlet property="MainDeckView" destination="F7Z-V1-E8V" id="HbE-3U-TXr"/>
+                        <outlet property="MainDeckView" destination="F7Z-V1-E8V" id="kn1-Hc-U3k"/>
                         <outlet property="Table" destination="dHL-cX-ATV" id="g8h-W6-C0q"/>
                         <outlet property="cardsInDeckLabel" destination="bre-nM-coi" id="KYi-mS-7iy"/>
                         <outlet property="setsFoundLabel" destination="qiH-B1-qsH" id="kcL-ad-Yc1"/>

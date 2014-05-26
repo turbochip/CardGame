@@ -17,8 +17,10 @@
 @property (nonatomic) NSInteger cardQuantity;
 @property (nonatomic) BOOL cardChosen;
 @property (nonatomic) BOOL cardMatched;
+@property (nonatomic) BOOL animateDealCard;
+@property (nonatomic) BOOL animateRemoveCard;
 
+- (void) setAnimateRemoveCard:(BOOL)animateRemoveCard;
 
-- (void) removeSubview: (CGSetCardView *) sv;
 
 @end

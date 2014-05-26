@@ -68,6 +68,7 @@
 #pragma mark Drawing Code
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
+/*
 - (void)drawRect:(CGRect)rect
 {
 //    [self setup];
@@ -75,6 +76,7 @@
     // Drawing code
     NSLog(@"drawRect self.origin=%f,%f self.size=%f,%f",self.frame.origin.x,self.frame.origin.y,self.frame.size.width,self.frame.size.height);
 }
+*/
 
 - (CGSetCardView *) addCard
 {
@@ -95,12 +97,12 @@
     [self addSubview:self.card];
     
     self.o_x=self.o_x+CARDWIDTH+CARDSPACINGHORIZONTAL;
-    NSLog(@"self.frame.origin=%f,%f  size=%f,%f",self.frame.origin.x,self.frame.origin.y,self.frame.size.width,self.frame.size.height);
-    NSLog(@"self.bounds.origin=%f,%f  size=%f,%f",self.bounds.origin.x,self.bounds.origin.y,self.bounds.size.width,self.bounds.size.height);
-    NSLog(@"test point=%f,%f",self.o_x+CARDWIDTH+CARDSPACINGHORIZONTAL,self.o_y);
+//    NSLog(@"self.frame.origin=%f,%f  size=%f,%f",self.frame.origin.x,self.frame.origin.y,self.frame.size.width,self.frame.size.height);
+//    NSLog(@"self.bounds.origin=%f,%f  size=%f,%f",self.bounds.origin.x,self.bounds.origin.y,self.bounds.size.width,self.bounds.size.height);
+//    NSLog(@"test point=%f,%f",self.o_x+CARDWIDTH+CARDSPACINGHORIZONTAL,self.o_y);
     if(!CGRectContainsPoint(self.bounds, CGPointMake(self.o_x+CARDWIDTH+CARDSPACINGHORIZONTAL, self.o_y)))
     {
-        NSLog(@"Point not in frame adding new line");
+//        NSLog(@"Point not in frame adding new line");
         self.o_x=FIRSTCARDX;
         self.o_y=self.o_y+CARDHEIGHT+CARDSPACINGVERTICAL;
     }

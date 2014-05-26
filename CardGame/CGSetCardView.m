@@ -78,6 +78,11 @@
     [self setNeedsDisplay];
 }
 
+- (void) setAnimateRemoveCard:(BOOL)animateRemoveCard
+{
+    _animateRemoveCard=animateRemoveCard;
+    [self setNeedsDisplay];
+}
 
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
@@ -104,6 +109,7 @@
         UIImageView *backView=[[UIImageView alloc] initWithFrame: self.bounds];
         [backView setImage:backImage];
         [self addSubview:backView];
+//        [self removeCardFromTable:backView];
     }
 }
 
@@ -308,10 +314,5 @@ void MyDrawColoredPattern (void *info, CGContextRef context)
                                            &callbacks);
     return pattern;
     
-}
-
-- (void) removeSubview: (CGSetCardView *) sv
-{
-    [sv removeFromSuperview];
 }
 @end

@@ -8,6 +8,7 @@
 
 #import "CGCard.h"
 #import "CGSetCardView.h"
+#import "CGSetCardAnimation.h"
 
 @interface CGSetCard : CGCard
 @property (nonatomic) NSInteger cardShape;
@@ -21,6 +22,7 @@
 @property (nonatomic,strong) NSDictionary *FillDict;
 @property (nonatomic,strong) NSDictionary *ColorDict;
 @property (nonatomic,strong) NSDictionary *ShapeDict;
+@property (nonatomic,strong) CGSetCardAnimation *cardAnimation;
 
 - (CGCard *) createCardWithColor: (UIColor *) color Shape: (NSInteger) shape Fill: (NSInteger) fill Quantity: (NSInteger) quantity;
 

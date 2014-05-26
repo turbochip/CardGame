@@ -87,4 +87,11 @@ typedef NS_ENUM(NSInteger, Shape) {
     NSLog(@"Creating %@",newCard.contents);
     return newCard;
 }
+
+- (CGSetCardAnimation *) cardAnimation
+{
+    if(!_cardAnimation) _cardAnimation=[[CGSetCardAnimation alloc] init];
+    return _cardAnimation;
+}
+
 @end

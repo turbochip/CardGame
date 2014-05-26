@@ -11,6 +11,7 @@
 #import "CGSetDeck.h"
 #import "CGSetHand.h"
 #import "CGSetView.h"
+#import "CGMainSetDeckView.h"
 
 @interface CGSetViewController : UIViewController
 @property (nonatomic,strong) CGSetDeck * fullDeck;
@@ -21,7 +22,10 @@
 @property (nonatomic,strong) NSMutableArray * matchedCards;
 @property (strong, nonatomic) IBOutlet UILabel *setsFoundLabel;
 @property (strong, nonatomic) IBOutlet UILabel *cardsInDeckLabel;
-@property (strong, nonatomic) IBOutlet CGSetCardView *MainDeckView;
+
+@property (weak, nonatomic) IBOutlet CGMainSetDeckView *MainDeckView;
+
+
 @property (weak, nonatomic) IBOutlet CGSetView *Table;
 
 @end

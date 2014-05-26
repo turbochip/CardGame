@@ -7,6 +7,7 @@
 //
 
 #import "CGMainSetDeckView.h"
+#import "CGCardView.h"
 
 @implementation CGMainSetDeckView
 
@@ -42,8 +43,11 @@
     
     UIImageView *backView=[[UIImageView alloc] initWithFrame: self.bounds];
     [backView setImage:Image];
+    for(UIImageView *siv in self.subviews){
+        [siv removeFromSuperview];
+    }
     [self addSubview:backView];
+//    [self dealCardAnimation:self];
 }
-
 
 @end

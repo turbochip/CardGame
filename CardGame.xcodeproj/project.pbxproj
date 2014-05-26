@@ -39,6 +39,7 @@
 		F176905C1916B28900E9CB8F /* playingcardback.png in Resources */ = {isa = PBXBuildFile; fileRef = F176905B1916B28900E9CB8F /* playingcardback.png */; };
 		F18E83291917F3A30012E796 /* CGSetCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = F18E83281917F3A30012E796 /* CGSetCardView.m */; };
 		F1C11BEF1916EC2300182501 /* CGCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C11BEE1916EC2300182501 /* CGCardView.m */; };
+		F1D22D8A19329CE100A1F330 /* CGSetCardAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = F1D22D8919329CE100A1F330 /* CGSetCardAnimation.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -106,6 +107,8 @@
 		F18E83281917F3A30012E796 /* CGSetCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGSetCardView.m; sourceTree = "<group>"; };
 		F1C11BED1916EC2300182501 /* CGCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGCardView.h; sourceTree = "<group>"; };
 		F1C11BEE1916EC2300182501 /* CGCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGCardView.m; sourceTree = "<group>"; };
+		F1D22D8819329CE100A1F330 /* CGSetCardAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGSetCardAnimation.h; sourceTree = "<group>"; };
+		F1D22D8919329CE100A1F330 /* CGSetCardAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGSetCardAnimation.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -218,6 +221,8 @@
 				F1698F041913396000DEE18B /* CGHand.m */,
 				F1698F0619133B7D00DEE18B /* CGMatchingCard.h */,
 				F1698F0719133B7D00DEE18B /* CGMatchingCard.m */,
+				F1D22D8819329CE100A1F330 /* CGSetCardAnimation.h */,
+				F1D22D8919329CE100A1F330 /* CGSetCardAnimation.m */,
 				F1698F0919133B9300DEE18B /* CGSetCard.h */,
 				F1698F0A19133B9300DEE18B /* CGSetCard.m */,
 				F1698F0C19133BAE00DEE18B /* CGMatchingDeck.h */,
@@ -383,6 +388,7 @@
 				F1698F0819133B7D00DEE18B /* CGMatchingCard.m in Sources */,
 				F1698F1119133BC200DEE18B /* CGSetDeck.m in Sources */,
 				F10D359E19244F39004CBD13 /* CGSetView.m in Sources */,
+				F1D22D8A19329CE100A1F330 /* CGSetCardAnimation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
