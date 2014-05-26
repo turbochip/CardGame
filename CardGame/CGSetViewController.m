@@ -17,7 +17,7 @@
 @interface CGSetViewController ()
 @property (nonatomic) NSInteger setScore;
 @property (nonatomic,strong) CGMainSetDeckView* deckView;
-
+@property (nonatomic,strong) CGSetHand *discardHand;
 - (CGSetHand *) buildArrayFromReferenceArray: (NSArray *) sourceArray;
 @end
 
@@ -78,51 +78,12 @@
 #pragma mark button presses
 
 
-
 - (IBAction)RedealButtonPress:(UIButton *)sender {
-    if(self.matchedCards.count){ // if there are matches on the board replace them instead of redealing the entire board.
-        [self reDealMatchesOnBoard];
-    } else {
-        if(self.hand.handOfCards.count==self.hand.setHandMaximumSize)
-        {   //Reset entire table since we are asking for a redeal with 15 cards showing
-            //and then wipe the whole hand.
-            [self clearTable];
-            // Wipeout hand
-            self.hand=nil;
-            self.hand=[[CGSetHand alloc] init];
-            // do we have at least 12 cards left in full deck
-            
-            [self.Table setNeedsDisplay];
-            
-            
-            if(self.fullDeck.deckSize>=self.hand.setHandMinimumSize)
-            {
-                //There are enough cards, so deal a new hand
-                [self dealHand: self.hand toTable:self.Table from:self.fullDeck];
-                [self.MainDeckView setNeedsDisplay];
-            } else {
-                // There are not enough cards so throw an error.
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" message:@"You have exhausted your deck" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Restart", nil];
-                [alert show];
-            }
-            
-            
-            
-            
-        } else {  // There are only 12 cards on the table.
-            if(self.fullDeck.deckSize>=3) {  // There are 3 or more cards left in the full deck
-                for (int i=self.hand.handOfCards.count;i<self.hand.setHandMaximumSize;i++){  // Add 3 new cards
-                    [self dealCardToHand:self.hand andTable:self.Table from:self.fullDeck];
-                }
-                self.TableCards=self.Table.subviews;
-                [self.MainDeckView setNeedsDisplay];
-            }else { // less than 3 cards left in deck throw error.
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" message:@"You have exhausted your deck" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Restart", nil];
-                [alert show];
-            }
-        }
-    } // end of check for additional matches.  If there were matches we replaced them and just skipped this method.
-    [self updateUI];
+    [self redealAction];
+}
+
+- (IBAction)dealMainDeckSwipe:(UISwipeGestureRecognizer *)sender {
+    [self redealAction];
 }
 
 - (IBAction)NewGameButtonPress:(UIButton *)sender {
@@ -223,41 +184,54 @@
             NSLog(@"Orientation Changed to PortraitUpsideDown");
             break;
     }
+    for(CGSetCard *card in self.hand.handOfCards)
+        [card.cardViewButton removeFromSuperview];
     [self updateUI];
 }
 
 - (void)updateUI
 {
     //clear off table
-    for (CGSetCardView *pcard in self.Table.subviews){
+/*    for (CGSetCardView *pcard in self.Table.subviews){
             [pcard removeFromSuperview];
         }
-    
+*/
     self.Table.table=nil;
     NSInteger indexTag=0;  //Tag to relate the pcard subview back to the index of the lcard.
     
+    if(self.discardHand)
+    {
+        for(CGSetCard *card in self.discardHand.handOfCards) {
+            [card.cardAnimation setAnimateDiscard:YES];
+            [card.cardAnimation setDiscardDstLoc:CGRectMake(0, 500, 100, 175)];
+            [card.cardAnimation setDiscardSrcLoc:card.cardViewButton.frame];
+            [self doAnimationForCard:card];
+        }
+    }
     //For each logical card we are going to create the pcard on the table, register the tapgesture, set the color and tag it.
     for (CGSetCard *card in self.hand.handOfCards)
     {
-        [self doAnimationForCard:card];
         // add lcard to table creating a pcard then copy all the properties of the lcard display to the pcard.
         CGSetCardView *pcard=[self.Table addCard];
         // tag physical card with object index for logical card
         [pcard setTag:indexTag++];
+        if(card.cardAnimation.animateDealCard)
+            card.cardAnimation.dealDstLoc=pcard.frame;
         
         // create tap gesture recognizer for the physical card.
         UITapGestureRecognizer * tapRecognizer  = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tableCardTap:)];
         [tapRecognizer setNumberOfTapsRequired:1];
         [tapRecognizer setNumberOfTouchesRequired:1];
         [pcard addGestureRecognizer:tapRecognizer];
-        CGRect pframe=pcard.frame;
         
         [self assignHandCard:card toTableCard:pcard];
-        if(pcard.animateDealCard){
-            [pcard setFrame:self.MainDeckView.frame];
-//            [self animateDealCardToTable:card toPoint:pframe];
-            [pcard setFrame:pframe];
+        
+        if(card.cardAnimation.animateDealCard){
+            [pcard setFrame:card.cardAnimation.dealSrcLoc];
+              [self doAnimationForCard:card];
+//            [pcard setFrame:card.cardAnimation.dealDstLoc];
         }
+        
         [card.cardViewButton setNeedsDisplay];
         
     }
@@ -293,7 +267,7 @@
     cardView.cardShape=card.cardShape;
     cardView.cardFill=card.cardFill;
     cardView.cardBackImage=card.cardBackImage;
-    cardView.animateRemoveCard=card.cardAnimation.animateDiscard ;
+    cardView.animateRemoveCard=card.cardAnimation.animateDiscard;
     cardView.animateDealCard=card.cardAnimation.animateDealCard;
     cardView.cardQuantity=card.cardQuantity;
 }
@@ -313,7 +287,7 @@
 {
     for(CGSetCard *lcard in self.hand.handOfCards){
         [lcard.cardAnimation setAnimateDiscard:YES];
-        [lcard.cardAnimation setDiscardDstLoc:CGRectMake(0, 500, lcard.cardViewButton.frame.size.width, lcard.cardViewButton.frame.size.height)];
+        [lcard.cardAnimation setDiscardDstLoc:CGRectMake(0, 500, 100,175)];
         [lcard.cardAnimation setDiscardSrcLoc:lcard.cardViewButton.frame];
     }
     self.selectedCards=nil;
@@ -333,8 +307,6 @@
     NSLog(@"Dealing Card %@",[((CGSetCard *)Hand.handOfCards.lastObject) contents]);
 }
 
-
-
 - (void) dealHand: (CGSetHand *) Hand toTable: (CGSetView *) Table from:(CGSetDeck *) Deck
 {
     [self clearTable];
@@ -344,6 +316,55 @@
     }
 }
 
+// Method called by AddMoreCards Button and by swiping main deck.
+- (void) redealAction
+{
+    if(self.matchedCards.count){ // if there are matches on the board replace them instead of redealing the entire board.
+        [self reDealMatchesOnBoard];
+    } else {
+        if(self.hand.handOfCards.count==self.hand.setHandMaximumSize)
+        {   //Reset entire table since we are asking for a redeal with 15 cards showing
+            //and then wipe the whole hand.
+            //[self clearTable];
+            //[self updateUI];
+            // Wipeout hand
+            self.discardHand = self.hand;
+            self.hand=nil;
+            self.hand=[[CGSetHand alloc] init];
+            // do we have at least 12 cards left in full deck
+            
+            [self.Table setNeedsDisplay];
+            
+            
+            if(self.fullDeck.deckSize>=self.hand.setHandMinimumSize)
+            {
+                //There are enough cards, so deal a new hand
+                [self dealHand: self.hand toTable:self.Table from:self.fullDeck];
+                [self.MainDeckView setNeedsDisplay];
+            } else {
+                // There are not enough cards so throw an error.
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" message:@"You have exhausted your deck" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Restart", nil];
+                [alert show];
+            }
+            
+        } else {  // There are only 12 cards on the table.
+            if(self.fullDeck.deckSize>=3) {  // There are 3 or more cards left in the full deck
+                for (int i=self.hand.handOfCards.count;i<self.hand.setHandMaximumSize;i++){  // Add 3 new cards
+                    [self dealCardToHand:self.hand andTable:self.Table from:self.fullDeck];
+                }
+                self.TableCards=self.Table.subviews;
+                [self.MainDeckView setNeedsDisplay];
+            }else { // less than 3 cards left in deck throw error.
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" message:@"You have exhausted your deck" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Restart", nil];
+                [alert show];
+            }
+        }
+    } // end of check for additional matches.  If there were matches we replaced them and just skipped this method.
+    [self updateUI];
+    
+}
+
+
 - (void) reDealMatchesOnBoard{
     if(self.matchedCards.count>self.fullDeck.deckOfCards.count) {
         // There are not enough cards so throw an error.
@@ -352,6 +373,8 @@
     } else {
         // sort the matched array so that we remove the largest match first that way the index for the lower numbers doesn't change when we remove a card out of the middle of the hand.  For example the matched cards were array indexes 3, 8, 11.  If we remove index 3 first, then the matched array still wants to remove indexes 8 and 11, but in the self.matchedCards array, they are now at indexes 7 and 10, so if we start with the highest number and work backwards, when we remove 11, 3 and 8 don't change because they aren't shifting forward due to something being removed out from under them.
         NSSortDescriptor *sd = [[NSSortDescriptor alloc] initWithKey:nil ascending:NO];
+        self.discardHand=nil;
+        self.discardHand=[[CGSetHand alloc] init];
         NSArray *sa = [self.matchedCards sortedArrayUsingDescriptors:@[sd]];  // sa=sortedarray
         for(int j=0;j<sa.count;j++) {
             NSInteger matchedCardIndex=((NSNumber *)[sa objectAtIndex:j]).integerValue;
@@ -359,8 +382,11 @@
             // need to animate removing cards here before we remove our link to the physical card.
             [[[self.hand.handOfCards objectAtIndex:matchedCardIndex] cardAnimation] setAnimateDiscard:YES];
             [[[self.hand.handOfCards objectAtIndex:matchedCardIndex] cardAnimation] setDiscardSrcLoc:pcard.frame];
-            [[[self.hand.handOfCards objectAtIndex:matchedCardIndex] cardAnimation] setDiscardDstLoc:CGRectMake(0, 0, pcard.frame.size.width, pcard.frame.size.height)];
+            [[[self.hand.handOfCards objectAtIndex:matchedCardIndex] cardAnimation] setDiscardDstLoc:CGRectMake(0, 500, 100, 175)];
+            [self.discardHand.handOfCards addObject:[self.hand.handOfCards objectAtIndex:matchedCardIndex]];
+            [self.hand.handOfCards removeObjectAtIndex:matchedCardIndex];
         }
+//        self.discardHand=self.hand;
         sa=nil;
         while(self.hand.handOfCards.count<self.hand.setHandMinimumSize){
             [self dealCardToHand:self.hand andTable:self.Table from:self.fullDeck];
@@ -380,78 +406,49 @@
 
 #pragma mark Animation
 
-/*- (void) animateRemoveCardFromTable: (CGSetCardView *) pcard
-{
-    if(pcard.animateRemoveCard) {
-        NSLog(@"About to animate removing card");
-        [UIView animateWithDuration:.5
-                              delay:0
-                            options:UIViewAnimationOptionCurveEaseOut
-                         animations:^{
-                             //[pcard setCenter:CGPointMake(0,1000)];
-                             [pcard setFrame:CGRectMake(0, 500, pcard.frame.size.width,pcard.frame.size.height)];
-                         }
-                         completion:^(BOOL finished) {
-                             [pcard removeFromSuperview];
-                             [pcard setNeedsDisplay];
-                         }];
-        [pcard setNeedsDisplay];
-    }
-    [pcard setAnimateRemoveCard:NO];
-}
-
-- (void) animateDealCardToTable: (CGSetCard *) card toPoint: (CGRect) destFrame
-{
-    CGSetCardView *pcard=card.cardViewButton;
-    if(pcard.animateDealCard) {
-        NSLog(@"About to animate dealing card to table");
-        [UIView animateWithDuration:.5
-                              delay:1
-                            options:UIViewAnimationOptionCurveEaseOut
-                         animations:^{
-                             [pcard setCenter:CGPointMake(0,0)];
-                         }
-                         completion:^(BOOL finished) {
-                             [pcard setNeedsDisplay];
-                         }];
-        [pcard setNeedsDisplay];
-    }
-    [card setAnimateDealCard:NO];
-
-}
-
-*/
-
 - (void) doAnimationForCard: (CGSetCard *) card
 {
     CGSetCardView *pcard = card.cardViewButton;
-    BOOL deal=card.cardAnimation.animateDealCard;
-    BOOL discard=card.cardAnimation.animateDiscard;
+    NSInteger action;
+    CGRect srcloc,dstloc;
+    
+    if(card.cardAnimation.animateDealCard){
+        action=1;
+        srcloc=card.cardAnimation.dealSrcLoc;
+        dstloc=card.cardAnimation.dealDstLoc;
+    }
+    else {
+        if(card.cardAnimation.animateDiscard) {
+            action=2;
+            srcloc=card.cardAnimation.discardSrcLoc;
+            dstloc=card.cardAnimation.discardDstLoc;
+        }
+        else {
+            action=0;
+        }
+    }
     [UIView animateWithDuration:.5
                           delay:0
                         options:UIViewAnimationOptionCurveEaseOut
                      animations:^{
-                         NSLog(@"doAnimationForCard discard block %d",discard);
-                         if(discard){
-                             NSLog(@"doAnimationForCard in discard block destination %f,%f",card.cardAnimation.discardDstLoc.origin.x,card.cardAnimation.discardDstLoc.origin.y);
-                             [card.cardViewButton setFrame:CGRectMake(0, 500, card.cardAnimation.discardDstLoc.size.width,card.cardAnimation.discardDstLoc.size.height)];
-                             [card.cardViewButton removeFromSuperview];
+                         NSLog(@"doAnimationForCard action= %d",action);
+                         if(action!=0)
+                             NSLog(@"doAnimationForCard action=%d destination %f,%f %f,%f",action,dstloc.origin.x,dstloc.origin.y,dstloc.size.width,dstloc.size.height);
+                             [card.cardViewButton setFrame:dstloc];
                          }
-                     }
                      completion:^(BOOL finished) {
-                             [UIView animateWithDuration:.5
-                                                   delay:0
-                                                 options:UIViewAnimationOptionCurveEaseOut
-                                              animations:^{
-                                                  NSLog(@"doAnimationForCard deal block %d",deal);
-                                                  if(deal) {
-                                                      NSLog(@"doAnimationForCard in deal block destination %f,%f",card.cardAnimation.dealDstLoc.origin.x,card.cardAnimation.dealDstLoc.origin.y);
-                                                      [card.cardViewButton setFrame:card.cardAnimation.dealDstLoc];
-                                                  }
-                                              }
-                                              completion:^(BOOL finished) {
-                                                  [pcard setNeedsDisplay];
-                                              }];
+                         switch(action) {
+                             case 0:
+                                 break;
+                             case 1:
+                                 [card.cardAnimation setAnimateDealCard:NO];
+                                 break;
+                             case 2:
+                                 [card.cardViewButton removeFromSuperview];
+                                 [card.cardAnimation setAnimateDiscard:NO];
+                                 break;
+                         }
+                         [pcard setNeedsDisplay];
                      }];
 }
 
