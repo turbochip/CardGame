@@ -11,6 +11,7 @@
 
 @interface CGSetView : UIView
 @property (nonatomic,strong) NSMutableArray *table;
+@property (nonatomic) CGRect originalTableSize;
 
 
 - (CGSetCardView *) addCard;

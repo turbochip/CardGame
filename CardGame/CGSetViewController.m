@@ -15,9 +15,10 @@
 #import "CGSetView.h"
 
 @interface CGSetViewController ()
+@property (nonatomic) CGRect originalTableShape;
 @property (nonatomic) NSInteger setScore;
 @property (nonatomic,strong) CGMainSetDeckView* deckView;
-@property (nonatomic,strong) CGSetHand *discardHand;
+//@property (nonatomic,strong) CGSetHand *discardHand;
 - (CGSetHand *) buildArrayFromReferenceArray: (NSArray *) sourceArray;
 @end
 
@@ -32,19 +33,6 @@
     return self;
 }
 
-- (void)start
-{
-    self.setCard = [[CGSetCard alloc] init];
-    self.fullDeck = [[CGSetDeck alloc] init];
-    self.hand = [[CGSetHand alloc] init];
-    
-    self.fullDeck = [self.fullDeck createSetDeckof:self.setCard];
-    [self dealHand: self.hand toTable:self.Table from:self.fullDeck];
-    
-    [self updateUI];
-}
-
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -54,10 +42,24 @@
                                              selector:@selector(didRotate:)
                                                  name:UIDeviceOrientationDidChangeNotification
                                                object:nil];
-    
+    self.originalTableShape=self.Table.frame;
     [self start];
-    //    self.Table.backgroundColor=[UIColor darkGrayColor];
+    // Show it on the UI
+    [self updateUI];
 }
+
+- (void)start
+{
+    self.setCard = [[CGSetCard alloc] init]; // alloc a set card (not sure why)
+    self.fullDeck = [[CGSetDeck alloc] init];  // allocate full deck
+    self.hand = [[CGSetHand alloc] init];       // allocate hand
+    
+    // create a full deck of set cards
+    self.fullDeck = [self.fullDeck createSetDeckof:self.setCard];
+    // deal a hand of 12 set cards from the full deck we just created.
+    [self dealHand: self.hand toTable:self.Table from:self.fullDeck];
+}
+
 
 #pragma mark getters and setters
 
@@ -80,14 +82,17 @@
 
 - (IBAction)RedealButtonPress:(UIButton *)sender {
     [self redealAction];
+    [self updateUI];
 }
 
 - (IBAction)dealMainDeckSwipe:(UISwipeGestureRecognizer *)sender {
     [self redealAction];
+    [self updateUI];
 }
 
 - (IBAction)NewGameButtonPress:(UIButton *)sender {
     [self resetGame];
+    [self updateUI];
 }
 
 - (IBAction)ClearMatchesButtonPress:(UIButton *)sender {
@@ -164,11 +169,66 @@
     [self updateUI];
 }
 
+- (IBAction)TablePinch:(UIPinchGestureRecognizer *)sender {
+    switch(sender.state) {
+        case UIGestureRecognizerStateBegan:
+            break;
+        case UIGestureRecognizerStateChanged:
+            NSLog(@"Translation=%f",sender.velocity);
+            NSLog(@"Sender frame=%f,%f %f,%f",sender.view.frame.origin.x+sender.velocity,sender.view.frame.origin.y+sender.velocity,sender.view.frame.size.width-sender.velocity,sender.view.frame.size.height-sender.velocity);
+            NSLog(@"orignal frame=%f,%f %f,%f",self.Table.originalTableSize.origin.x,self.Table.originalTableSize.origin.y,self.Table.originalTableSize.size.width,self.Table.originalTableSize.size.height);
+            if((sender.view.frame.origin.x-sender.velocity>=self.Table.originalTableSize.origin.x) &&
+               (sender.view.frame.origin.y-sender.velocity>=self.Table.originalTableSize.origin.y) &&
+               (sender.view.frame.size.width+(sender.velocity)<=self.Table.originalTableSize.size.width) &&
+               (sender.view.frame.size.height+(sender.velocity)<=self.Table.originalTableSize.size.height)) {
+                CGPoint centerOfTable=CGPointMake(sender.view.frame.size.width/2,sender.view.frame.size.height/2);
+                // ok we can continue pinching
+                CGFloat v = -sender.velocity;
+                for (CGSetCard *lcard in self.hand.handOfCards) {
+                    CGFloat xMultiplier=1;
+                    CGFloat yMultiplier=1;
+                    if(lcard.cardViewButton.frame.origin.x<centerOfTable.x)
+                        xMultiplier=1;
+                    else
+                        xMultiplier=-1;
+                    
+                    if(lcard.cardViewButton.frame.origin.y<centerOfTable.y)
+                        yMultiplier=1;
+                    else
+                        yMultiplier=-1;
+                        
+                    [lcard.cardViewButton setFrame:CGRectMake((lcard.cardViewButton.frame.origin.x)+(v*xMultiplier),
+                                                            (lcard.cardViewButton.frame.origin.y)+(v*yMultiplier),
+                                                            lcard.cardViewButton.frame.size.width,
+                                                            lcard.cardViewButton.frame.size.height)];
+                }
+/*
+                [self.Table setFrame:CGRectMake(self.Table.frame.origin.x+v,
+                                                self.Table.frame.origin.y+v,
+                                                self.Table.frame.size.width-(v*2),
+                                                self.Table.frame.size.height-(v*2))];
+ */
+                }
+            break;
+        case UIGestureRecognizerStateEnded:
+            [self resetGame];
+            [self updateUI];
+            break;
+        case UIGestureRecognizerStateCancelled:
+            break;
+        case UIGestureRecognizerStateFailed:
+            break;
+        case UIGestureRecognizerStatePossible:
+            break;
+    }
+}
+
 #pragma mark important stuff
 
 //response to orientation change
 -(void)didRotate:(NSNotification *)notification
 {
+    // tell us what the orientation change was just for fun
     switch([[UIApplication sharedApplication] statusBarOrientation])
     {
         case UIInterfaceOrientationLandscapeLeft:
@@ -184,6 +244,7 @@
             NSLog(@"Orientation Changed to PortraitUpsideDown");
             break;
     }
+    // ok we need to clear everything off so that we don't leave any stragglers around.
     for(CGSetCard *card in self.hand.handOfCards)
         [card.cardViewButton removeFromSuperview];
     [self updateUI];
@@ -192,22 +253,13 @@
 - (void)updateUI
 {
     //clear off table
-/*    for (CGSetCardView *pcard in self.Table.subviews){
+    for (CGSetCardView *pcard in self.Table.subviews){
             [pcard removeFromSuperview];
         }
-*/
+
     self.Table.table=nil;
     NSInteger indexTag=0;  //Tag to relate the pcard subview back to the index of the lcard.
     
-    if(self.discardHand)
-    {
-        for(CGSetCard *card in self.discardHand.handOfCards) {
-            [card.cardAnimation setAnimateDiscard:YES];
-            [card.cardAnimation setDiscardDstLoc:CGRectMake(0, 500, 100, 175)];
-            [card.cardAnimation setDiscardSrcLoc:card.cardViewButton.frame];
-            [self doAnimationForCard:card];
-        }
-    }
     //For each logical card we are going to create the pcard on the table, register the tapgesture, set the color and tag it.
     for (CGSetCard *card in self.hand.handOfCards)
     {
@@ -229,7 +281,6 @@
         if(card.cardAnimation.animateDealCard){
             [pcard setFrame:card.cardAnimation.dealSrcLoc];
               [self doAnimationForCard:card];
-//            [pcard setFrame:card.cardAnimation.dealDstLoc];
         }
         
         [card.cardViewButton setNeedsDisplay];
@@ -303,6 +354,7 @@
     [[[Hand.handOfCards lastObject] cardAnimation] setDealSrcLoc:self.MainDeckView.frame];
     CGRect dstloc=[[[Hand.handOfCards lastObject] cardViewButton] frame];
     [[[Hand.handOfCards lastObject] cardAnimation] setDealDstLoc:dstloc];
+    
      
     NSLog(@"Dealing Card %@",[((CGSetCard *)Hand.handOfCards.lastObject) contents]);
 }
@@ -328,7 +380,6 @@
             //[self clearTable];
             //[self updateUI];
             // Wipeout hand
-            self.discardHand = self.hand;
             self.hand=nil;
             self.hand=[[CGSetHand alloc] init];
             // do we have at least 12 cards left in full deck
@@ -360,7 +411,7 @@
             }
         }
     } // end of check for additional matches.  If there were matches we replaced them and just skipped this method.
-    [self updateUI];
+//    [self updateUI];
     
 }
 
@@ -373,8 +424,6 @@
     } else {
         // sort the matched array so that we remove the largest match first that way the index for the lower numbers doesn't change when we remove a card out of the middle of the hand.  For example the matched cards were array indexes 3, 8, 11.  If we remove index 3 first, then the matched array still wants to remove indexes 8 and 11, but in the self.matchedCards array, they are now at indexes 7 and 10, so if we start with the highest number and work backwards, when we remove 11, 3 and 8 don't change because they aren't shifting forward due to something being removed out from under them.
         NSSortDescriptor *sd = [[NSSortDescriptor alloc] initWithKey:nil ascending:NO];
-        self.discardHand=nil;
-        self.discardHand=[[CGSetHand alloc] init];
         NSArray *sa = [self.matchedCards sortedArrayUsingDescriptors:@[sd]];  // sa=sortedarray
         for(int j=0;j<sa.count;j++) {
             NSInteger matchedCardIndex=((NSNumber *)[sa objectAtIndex:j]).integerValue;
@@ -383,10 +432,8 @@
             [[[self.hand.handOfCards objectAtIndex:matchedCardIndex] cardAnimation] setAnimateDiscard:YES];
             [[[self.hand.handOfCards objectAtIndex:matchedCardIndex] cardAnimation] setDiscardSrcLoc:pcard.frame];
             [[[self.hand.handOfCards objectAtIndex:matchedCardIndex] cardAnimation] setDiscardDstLoc:CGRectMake(0, 500, 100, 175)];
-            [self.discardHand.handOfCards addObject:[self.hand.handOfCards objectAtIndex:matchedCardIndex]];
             [self.hand.handOfCards removeObjectAtIndex:matchedCardIndex];
         }
-//        self.discardHand=self.hand;
         sa=nil;
         while(self.hand.handOfCards.count<self.hand.setHandMinimumSize){
             [self dealCardToHand:self.hand andTable:self.Table from:self.fullDeck];
@@ -399,6 +446,7 @@
 - (void) resetGame
 {
     [self clearTable];
+    [self.Table setFrame:self.Table.originalTableSize];
     self.setScore=0;
     self.fullDeck=nil;
     [self start];

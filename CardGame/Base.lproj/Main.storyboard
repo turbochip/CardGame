@@ -61,6 +61,10 @@
                                 <rect key="frame" x="20" y="52" width="215" height="192"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.85224680656934293" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="Ys4-cU-AMS" appends="YES" id="zFi-Sp-L8O"/>
+                                </connections>
                             </view>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="00 Cards in Deck" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bre-nM-coi">
                                 <rect key="frame" x="163" y="20" width="136" height="21"/>
@@ -84,6 +88,7 @@
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.85102075729927007" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="bre-nM-coi" firstAttribute="top" secondItem="ttU-Fc-B7L" secondAttribute="bottom" id="A2r-pT-LgN"/>
                             <constraint firstItem="bre-nM-coi" firstAttribute="leading" secondItem="qiH-B1-qsH" secondAttribute="trailing" constant="28" id="E3V-x6-ujK"/>
@@ -107,6 +112,9 @@
                             <constraint firstItem="HTs-Zy-1jq" firstAttribute="trailing" secondItem="1Tf-6l-5EX" secondAttribute="trailing" id="xrc-2A-DAZ"/>
                             <constraint firstItem="dHL-cX-ATV" firstAttribute="leading" secondItem="xiO-6H-1Pr" secondAttribute="leading" constant="20" symbolic="YES" id="yqC-Xs-2gg"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="Ys4-cU-AMS" appends="YES" id="heU-Co-etN"/>
+                        </connections>
                     </view>
                     <tabBarItem key="tabBarItem" title="Set" id="xL9-ZM-fuD"/>
                     <navigationItem key="navigationItem" id="JEC-k9-AT2"/>
@@ -123,6 +131,11 @@
                         <action selector="dealMainDeckSwipe:" destination="ZTz-I3-xYW" id="azg-O0-Rt3"/>
                     </connections>
                 </swipeGestureRecognizer>
+                <pinchGestureRecognizer id="Ys4-cU-AMS">
+                    <connections>
+                        <action selector="TablePinch:" destination="ZTz-I3-xYW" id="HzP-ce-ELG"/>
+                    </connections>
+                </pinchGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1803" y="-564"/>
         </scene>
